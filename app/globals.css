@@ -7,8 +7,7 @@
   --color-line: #1f1f1f;
   --color-muted: rgba(255, 255, 255, 0.5);
   --color-faint: rgba(255, 255, 255, 0.32);
-  --color-accent: #74e88a;
-  --color-accent-dim: #3f7f4d;
+  --color-accent: #476332;
 
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-mono-jb), ui-monospace, SFMono-Regular, monospace;
@@ -44,7 +43,7 @@ body {
 }
 
 ::selection {
-  background: rgba(116, 232, 138, 0.25);
+  background: rgba(71, 99, 50, 0.35);
   color: #fff;
 }
 
@@ -368,11 +367,11 @@ body {
   0%,
   100% {
     opacity: 1;
-    box-shadow: 0 0 0 0 rgba(116, 232, 138, 0.45);
+    box-shadow: 0 0 0 0 rgba(71, 99, 50, 0.55);
   }
   50% {
     opacity: 0.65;
-    box-shadow: 0 0 0 5px rgba(116, 232, 138, 0);
+    box-shadow: 0 0 0 5px rgba(71, 99, 50, 0);
   }
 }
 .live-dot {
