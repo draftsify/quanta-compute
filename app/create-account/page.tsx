@@ -7,17 +7,23 @@ import Particles from "@/components/Particles";
 export const metadata: Metadata = {
   title: "Create your Quanta account",
   description:
-    "Create a Quanta account with email, Google, GitHub or a connected wallet.",
+    "Create a Quanta account with email, Google or a connected wallet.",
 };
 
 const PROVIDERS = [
   {
     label: "Continue with Google",
-    path: "M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z",
+    icon: (
+      <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" />
+    ),
   },
   {
-    label: "Continue with GitHub",
-    path: "M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49l-.01-1.9c-2.78.62-3.37-1.22-3.37-1.22-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.57 2.34 1.12 2.91.86.09-.66.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.35 4.8-4.58 5.05.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.59.69.49A10.06 10.06 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z",
+    label: "Continue with wallet",
+    hint: "Phantom · Solflare",
+    icon: (
+      <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5H18a1 1 0 0 1 1 1v2H5.5A2.5 2.5 0 0 1 3 5.5v11A2.5 2.5 0 0 0 5.5 19H19a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1H5.5m11.5 4.5h.01" />
+    ),
+    stroke: true,
   },
 ];
 
@@ -109,13 +115,20 @@ export default function CreateAccount() {
               >
                 <svg
                   viewBox="0 0 24 24"
-                  fill="currentColor"
+                  fill={p.stroke ? "none" : "currentColor"}
+                  stroke={p.stroke ? "currentColor" : undefined}
+                  strokeWidth={p.stroke ? 1.5 : undefined}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   className="h-4 w-4"
                   aria-hidden="true"
                 >
-                  <path d={p.path} />
+                  {p.icon}
                 </svg>
                 {p.label}
+                {p.hint ? (
+                  <span className="text-[11.5px] text-faint">{p.hint}</span>
+                ) : null}
               </button>
             ))}
           </div>
@@ -123,14 +136,14 @@ export default function CreateAccount() {
           <p className="mt-8 text-[13px] leading-[1.6] text-faint">
             By continuing, you agree to our{" "}
             <a
-              href="#"
+              href="/legal/terms"
               className="underline underline-offset-4 transition-colors hover:text-white"
             >
               Terms of Service
             </a>{" "}
             and{" "}
             <a
-              href="#"
+              href="/legal/privacy"
               className="underline underline-offset-4 transition-colors hover:text-white"
             >
               Privacy Policy
