@@ -84,7 +84,7 @@ const GLYPHS = {
 
 function Tile({ glyph }: { glyph: keyof typeof GLYPHS }) {
   return (
-    <span className="flex size-10 shrink-0 items-center justify-center text-accent">
+    <span className="flex size-10 shrink-0 items-center justify-center text-white/65">
       <Glyph>{GLYPHS[glyph]}</Glyph>
     </span>
   );
@@ -141,15 +141,9 @@ export function AgentRails() {
 
 /* ----------------------------------------------------- 2. deploy chips */
 
-function Chip({
-  glyph,
-  label,
-}: {
-  glyph: keyof typeof GLYPHS;
-  label: string;
-}) {
+function Chip({ glyph, label }: { glyph: keyof typeof GLYPHS; label: string }) {
   return (
-    <span className="flex h-8 shrink-0 items-center gap-1.5 rounded-[6px] border border-accent/20 bg-accent/[0.08] px-2.5 text-[10.5px] font-medium whitespace-nowrap text-accent">
+    <span className="flex h-8 shrink-0 items-center gap-1.5 rounded-[6px] border border-white/[0.12] bg-white/[0.05] px-2.5 text-[10.5px] font-medium whitespace-nowrap text-white/70">
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -221,12 +215,12 @@ export function RunBars() {
               <div
                 key={i}
                 className={`relative w-full rounded-t-[3px] transition-[height] duration-[600ms] ease-in-out ${
-                  peak ? "bg-accent" : "bg-white/15"
+                  peak ? "bg-white/70" : "bg-white/15"
                 } ${bar.base} ${bar.hover}`}
               >
                 {peak ? (
                   <span className="absolute bottom-full left-1/2 mb-1.5 flex -translate-x-1/2 items-center gap-1.5 rounded-[5px] border border-white/[0.1] bg-[#101010] px-2 py-1 text-[10px] font-medium whitespace-nowrap text-white/80">
-                    <span className="size-1.5 rounded-full bg-accent" />
+                    <span className="size-1.5 rounded-full bg-white/70" />
                     Fine-tune · 4× H100
                   </span>
                 ) : null}
@@ -253,8 +247,8 @@ export function SshSession() {
     <Shell>
       <div className="flex size-full flex-col justify-center gap-2.5 px-6 sm:px-8">
         <div className="flex items-center gap-2 text-[11px] text-white/55">
-          <span className="live-dot size-1.5 shrink-0 rounded-full bg-accent" />
-          <span className="text-accent">ssh</span>
+          <span className="size-1.5 shrink-0 rounded-full bg-white/45" />
+          <span className="text-white/70">ssh</span>
           <span className="truncate">quanta@qx_8f3a21</span>
           <span className="ml-auto shrink-0 rounded-[4px] border border-white/[0.09] px-1.5 py-0.5 text-[9.5px] tracking-[0.08em] text-white/35 uppercase">
             scoped
@@ -269,8 +263,8 @@ export function SshSession() {
           </div>
         ))}
         <div className="flex items-center gap-2">
-          <span className="shrink-0 text-[11px] text-accent">$</span>
-          <span className="h-[13px] w-[7px] bg-accent/70" />
+          <span className="shrink-0 text-[11px] text-white/45">$</span>
+          <span className="h-[13px] w-[7px] bg-white/45" />
         </div>
       </div>
     </Shell>

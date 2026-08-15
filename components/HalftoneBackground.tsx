@@ -9,9 +9,9 @@ type Props = {
 };
 
 /**
- * The source render laid down twice: a soft base pass, then the same frame
- * punched through a 45° dot screen so it reads as halftone. Pure CSS — the
- * only motion is a transform on the image, which stays on the compositor.
+ * The source render laid down twice, desaturated: a soft base pass, then the
+ * same frame punched through a 45° dot screen so it reads as halftone. Pure
+ * CSS — the only motion is a transform, which stays on the compositor.
  */
 export default function HalftoneBackground({
   src = "/terrain.jpg",
@@ -30,7 +30,7 @@ export default function HalftoneBackground({
           fill
           sizes="100vw"
           priority={priority}
-          className="drift object-cover object-[50%_72%]"
+          className="drift object-cover object-[50%_72%] grayscale"
         />
       </div>
 
@@ -41,7 +41,7 @@ export default function HalftoneBackground({
           fill
           sizes="100vw"
           priority={priority}
-          className="drift object-cover object-[50%_72%] brightness-125 contrast-135 saturate-110"
+          className="drift object-cover object-[50%_72%] brightness-125 contrast-135 grayscale"
         />
       </div>
     </div>

@@ -42,28 +42,24 @@ const PRODUCTS = [
     title: "AI agent runs",
     body: "Give agents GPU tools, logs and a clean runtime for research, automation and evaluation.",
     tags: ["Agents", "Tools", "Logs"],
-    glow: "rgb(116,232,138)",
     Visual: AgentRails,
   },
   {
     title: "One-click deploys",
     body: "Start from a model or skill, pick capacity and launch a run without building cloud glue.",
     tags: ["Models", "Skills", "Deploy"],
-    glow: "rgb(153,238,255)",
     Visual: DeployChips,
   },
   {
     title: "Machine learning for startups",
     body: "Prototype, fine-tune and validate models without buying hardware or reserving clusters.",
     tags: ["Fine-tune", "Batch", "Eval"],
-    glow: "rgb(255,195,0)",
     Visual: RunBars,
   },
   {
     title: "Private GPU sessions",
     body: "Open SSH, stream logs and close the job when the workload is complete.",
     tags: ["SSH", "Terminal", "Receipts"],
-    glow: "rgb(169,86,247)",
     Visual: SshSession,
   },
 ];
@@ -363,12 +359,7 @@ export default function Home() {
                   className="frame reveal group relative overflow-hidden px-6 py-9 sm:px-8 sm:py-11"
                   data-delay={i * 60}
                 >
-                  <div
-                    className="pointer-events-none absolute -top-24 left-1/2 h-56 w-[420px] -translate-x-1/2 opacity-[0.07] blur-2xl transition-opacity duration-500 group-hover:opacity-[0.15]"
-                    style={{
-                      background: `radial-gradient(50% 50% at 50% 50%, ${p.glow} 0%, transparent 100%)`,
-                    }}
-                  />
+                  <div className="pointer-events-none absolute -top-24 left-1/2 h-56 w-[420px] -translate-x-1/2 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(255,255,255,0.55)_0%,transparent_100%)] opacity-[0.05] blur-2xl transition-opacity duration-500 group-hover:opacity-[0.11]" />
                   <div className="relative">
                     <p.Visual />
                     <h3 className="text-[19px] font-semibold tracking-[-0.025em] sm:text-[21px]">
