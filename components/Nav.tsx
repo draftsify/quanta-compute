@@ -68,7 +68,7 @@ export default function Nav() {
               <li key={l.href}>
                 <a
                   href={l.href}
-                  className="rounded-[4px] px-3 py-2 text-[13.5px] font-medium text-muted transition-colors hover:bg-white/[0.05] hover:text-white"
+                  className="rounded-[6px] px-3 py-2 text-[13.5px] font-medium text-muted transition-colors hover:bg-white/[0.05] hover:text-white"
                 >
                   {l.label}
                 </a>
@@ -79,7 +79,7 @@ export default function Nav() {
           <div className="flex items-center gap-2">
             <a
               href="#cta"
-              className="hidden rounded-[4px] border border-white/[0.12] bg-white/[0.05] px-4 py-2 text-[13px] font-medium text-white/85 transition-colors hover:border-white/20 hover:bg-white/[0.09] hover:text-white sm:inline-flex"
+              className="hidden rounded-[6px] border border-white/[0.12] bg-white/[0.05] px-4 py-2 text-[13px] font-medium text-white/85 transition-colors hover:border-white/20 hover:bg-white/[0.09] hover:text-white sm:inline-flex"
             >
               Create account
             </a>
@@ -88,7 +88,7 @@ export default function Nav() {
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-[4px] border border-white/[0.12] bg-white/[0.04] transition-colors hover:bg-white/[0.08] lg:hidden"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-[6px] border border-white/[0.12] bg-white/[0.04] transition-colors hover:bg-white/[0.08] lg:hidden"
             >
               <span className="relative block h-3 w-4">
                 <span
@@ -131,7 +131,7 @@ export default function Nav() {
             <a
               href="#cta"
               onClick={() => setOpen(false)}
-              className="mt-4 mb-3 block rounded-[4px] bg-white py-3 text-center text-[14px] font-semibold text-black"
+              className="mt-4 mb-3 block rounded-[6px] bg-white py-3 text-center text-[14px] font-semibold text-black"
             >
               Create account
             </a>

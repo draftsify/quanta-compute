@@ -41,13 +41,13 @@ export default function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <div className="flex flex-col gap-2.5">
+    <div className="flex flex-col gap-3">
       {ITEMS.map((item, i) => {
         const isOpen = open === i;
         return (
           <div
             key={item.q}
-            className="dashed reveal rounded-[4px] bg-white/[0.015]"
+            className="frame reveal"
             data-delay={i * 40}
           >
             <button
@@ -59,7 +59,7 @@ export default function Faq() {
               <span className="text-[15px] font-medium tracking-[-0.01em] sm:text-[16.5px]">
                 {item.q}
               </span>
-              <span className="relative grid h-7 w-7 shrink-0 place-items-center rounded-[3px] border border-white/[0.1] bg-white/[0.04]">
+              <span className="relative grid h-7 w-7 shrink-0 place-items-center rounded-[6px] border border-white/[0.1] bg-white/[0.04]">
                 <span className="absolute h-px w-3 bg-white" />
                 <span
                   className={`absolute h-px w-3 bg-white transition-transform duration-300 ${

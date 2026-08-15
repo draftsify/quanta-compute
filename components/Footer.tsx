@@ -83,15 +83,15 @@ export default function Footer() {
               </p>
             </div>
           </div>
-          <div className="hidden items-center gap-2 rounded-[4px] border border-white/[0.08] bg-white/[0.03] px-3.5 py-2 sm:flex">
+          <div className="hidden items-center gap-2 rounded-[6px] border border-white/[0.08] bg-white/[0.03] px-3.5 py-2 sm:flex">
             <span className="live-dot h-1.5 w-1.5 rounded-full bg-accent" />
-            <span className="font-mono text-[11.5px] tracking-[0.06em] text-muted uppercase">
+            <span className="text-[11.5px] font-medium tracking-[0.1em] text-muted uppercase">
               Public access after final testing
             </span>
           </div>
         </div>
 
-        <div className="h-px w-full bg-[repeating-linear-gradient(90deg,var(--color-line)_0_12px,transparent_12px_18px)]" />
+        <div className="h-px w-full bg-white/[0.06]" />
 
         {/* Link columns */}
         <div className="grid grid-cols-2 gap-x-6 gap-y-10 py-12 md:grid-cols-4 lg:grid-cols-[repeat(4,minmax(0,1fr))_auto]">
@@ -128,11 +128,11 @@ export default function Footer() {
                 required
                 placeholder="you@company.com"
                 aria-label="Email address"
-                className="h-10 min-w-0 flex-1 rounded-[4px] border border-white/[0.12] bg-white/[0.03] px-3 text-[13.5px] outline-none transition-colors placeholder:text-faint focus:border-white/25"
+                className="h-10 min-w-0 flex-1 rounded-[6px] border border-white/[0.12] bg-white/[0.03] px-3 text-[13.5px] outline-none transition-colors placeholder:text-faint focus:border-white/25"
               />
               <button
                 type="submit"
-                className="h-10 shrink-0 rounded-[4px] border border-white/[0.14] bg-white/[0.07] px-4 text-[13.5px] font-medium text-white/90 transition-colors hover:border-white/25 hover:bg-white/[0.12] hover:text-white"
+                className="h-10 shrink-0 rounded-[6px] border border-white/[0.14] bg-white/[0.07] px-4 text-[13.5px] font-medium text-white/90 transition-colors hover:border-white/25 hover:bg-white/[0.12] hover:text-white"
               >
                 Join
               </button>
@@ -140,7 +140,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="h-px w-full bg-[repeating-linear-gradient(90deg,var(--color-line)_0_12px,transparent_12px_18px)]" />
+        <div className="h-px w-full bg-white/[0.06]" />
 
         {/* Bottom bar */}
         <div className="flex flex-col items-center justify-between gap-5 py-7 sm:flex-row">
@@ -156,7 +156,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label={s.label}
-                className="grid h-9 w-9 place-items-center rounded-[4px] border border-white/[0.07] bg-white/[0.02] text-muted transition-colors hover:border-white/20 hover:text-white"
+                className="grid h-9 w-9 place-items-center rounded-[6px] border border-white/[0.07] bg-white/[0.02] text-muted transition-colors hover:border-white/20 hover:text-white"
               >
                 <svg
                   viewBox="0 0 24 24"
