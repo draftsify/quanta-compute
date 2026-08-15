@@ -24,8 +24,8 @@ const COLUMNS = [
       { label: "Branding", href: "#" },
       { label: "FAQ", href: "#" },
       { label: "Security", href: "#included" },
-      { label: "Be part of Quanta", href: "#token" },
-      { label: "Rewards", href: "#token" },
+      { label: "Be part of Quanta", href: "#" },
+      { label: "Rewards", href: "#" },
     ],
   },
   {
@@ -77,17 +77,13 @@ export default function Footer() {
               className="h-9 w-9"
             />
             <div>
-              <p className="text-[15px] font-semibold tracking-[-0.02em]">Quanta</p>
+              <p className="text-[15px] font-semibold tracking-[-0.02em]">
+                Quanta
+              </p>
               <p className="text-[12.5px] text-faint">
                 Compute orchestration for AI workloads.
               </p>
             </div>
-          </div>
-          <div className="hidden items-center gap-2 rounded-[6px] border border-white/[0.08] bg-white/[0.03] px-3.5 py-2 sm:flex">
-            <span className="live-dot h-1.5 w-1.5 rounded-full bg-accent" />
-            <span className="text-[11.5px] font-medium tracking-[0.1em] text-muted uppercase">
-              Public access after final testing
-            </span>
           </div>
         </div>
 

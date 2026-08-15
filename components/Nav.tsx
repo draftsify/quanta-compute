@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 const LINKS = [
   { label: "Products", href: "#products" },
   { label: "Included", href: "#included" },
-  { label: "Token", href: "#token" },
 ];
 
 export default function Nav() {

@@ -1,6 +1,5 @@
 import Image from "next/image";
 
-import CopyAddress from "@/components/CopyAddress";
 import Footer from "@/components/Footer";
 import HalftoneBackground from "@/components/HalftoneBackground";
 import LogoCloud from "@/components/LogoCloud";
@@ -9,8 +8,6 @@ import { AgentRails, DeployChips } from "@/components/ProductVisuals";
 import Reveal from "@/components/Reveal";
 
 /* ------------------------------------------------------------------ data */
-
-export const TOKEN_ADDRESS = "HdeAPoHivsm9MZfeY5tW7apJEprc8Fs594bWmnzfpump";
 
 const PRODUCTS = [
   {
@@ -168,8 +165,8 @@ export default function Home() {
                   The tag sits collapsed around the mark and opens on hover —
                   the 0fr/1fr grid track animates to the label's own width, so
                   nothing has to be measured. */}
-              <div className="frame reveal group flex items-center gap-2.5 bg-black/55 p-1.5 pr-4">
-                <span className="flex items-center gap-0 rounded-[4px] border border-accent/25 bg-accent/10 px-2 py-1.5">
+              <div className="frame reveal group flex items-center bg-black/55 p-1.5">
+                <span className="flex items-center rounded-[4px] border border-accent/25 bg-accent/10 px-2 py-1.5">
                   <Image
                     src="/logo.png"
                     alt="Quanta"
@@ -184,9 +181,6 @@ export default function Home() {
                       </span>
                     </span>
                   </span>
-                </span>
-                <span className="text-[12.5px] font-medium text-white/65 sm:text-[13px]">
-                  Public access opens after final testing
                 </span>
               </div>
 
@@ -295,64 +289,6 @@ export default function Home() {
                   </p>
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* =========================================================== TOKEN */}
-        <section className="mt-3 px-4 sm:px-6">
-          <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-3">
-            <SectionHeading
-              id="token"
-              eyebrow="Compute payment"
-              title="Pay for compute with Quanta."
-              sub="Use Quanta to fund compute jobs, set spend caps, release provider payments and refund unused balances when the job closes."
-            />
-
-            <div className="grid grid-cols-1 gap-3 lg:grid-cols-[1fr_1.4fr]">
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  ["Compute", "Usage"],
-                  ["1,000,000,000", "Supply"],
-                ].map(([v, k]) => (
-                  <div
-                    key={k}
-                    className="frame reveal flex flex-col items-center justify-center gap-1.5 px-4 py-10"
-                  >
-                    <span className="text-[17px] font-semibold tracking-[-0.03em] sm:text-[19px]">
-                      {v}
-                    </span>
-                    <span className="text-[11.5px] font-medium tracking-[0.12em] text-faint uppercase">
-                      {k}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="frame reveal px-6 py-8 sm:px-8" data-delay="80">
-                <p className="mb-3 text-[11.5px] font-semibold tracking-[0.14em] text-faint uppercase">
-                  Contract
-                </p>
-                <CopyAddress address={TOKEN_ADDRESS} />
-                <div className="mt-5 flex flex-wrap gap-2">
-                  <a
-                    href="https://dexscreener.com"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="rounded-[6px] border border-white/[0.12] bg-white/[0.03] px-4 py-2 text-[13px] font-medium text-white/80 transition-colors hover:border-white/25 hover:text-white"
-                  >
-                    Dexscreener
-                  </a>
-                  <a
-                    href="https://x.com"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="rounded-[6px] border border-white/[0.12] bg-white/[0.03] px-4 py-2 text-[13px] font-medium text-white/80 transition-colors hover:border-white/25 hover:text-white"
-                  >
-                    X
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
         </section>

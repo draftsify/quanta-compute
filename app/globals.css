@@ -361,32 +361,3 @@ body {
 .marquee:hover .marquee-track {
   animation-play-state: paused;
 }
-
-/* ---------- Subtle pulse for the live dot ---------- */
-@keyframes softpulse {
-  0%,
-  100% {
-    opacity: 1;
-    box-shadow: 0 0 0 0 rgba(71, 99, 50, 0.55);
-  }
-  50% {
-    opacity: 0.65;
-    box-shadow: 0 0 0 5px rgba(71, 99, 50, 0);
-  }
-}
-.live-dot {
-  animation: softpulse 2.4s ease-in-out infinite;
-}
-
-/* ---------- Accordion ---------- */
-.faq-panel {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.faq-panel[data-open="true"] {
-  grid-template-rows: 1fr;
-}
-.faq-panel > div {
-  overflow: hidden;
-}
