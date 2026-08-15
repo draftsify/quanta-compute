@@ -1,8 +1,5 @@
 import { LOGOS } from "./logos";
 
-/** Marks that are already wordmarks — showing them at 18px just smudges. */
-const WORDMARKS = new Set(["AMD", "Intel"]);
-
 export default function LogoCloud() {
   return (
     <div className="py-16 sm:py-20">
@@ -18,19 +15,22 @@ export default function LogoCloud() {
             className="frame reveal group flex h-[86px] items-center justify-center gap-2.5 px-4 transition-colors hover:border-white/15"
             data-delay={(i % 4) * 60}
           >
-            {WORDMARKS.has(logo.name) ? null : (
-              <svg
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                aria-hidden="true"
-                className="h-[18px] w-[18px] shrink-0 text-white/75 transition-colors group-hover:text-white"
-              >
-                <path d={logo.d} />
-              </svg>
+            <svg
+              viewBox={logo.box}
+              fill="currentColor"
+              role="img"
+              aria-label={logo.name}
+              className={`w-auto text-white/75 transition-colors group-hover:text-white ${
+                logo.wordmark ? "h-[15px]" : "h-[18px] shrink-0"
+              }`}
+            >
+              <path d={logo.d} />
+            </svg>
+            {logo.wordmark ? null : (
+              <span className="text-[15px] font-semibold tracking-[-0.02em] text-white/75 transition-colors group-hover:text-white">
+                {logo.name}
+              </span>
             )}
-            <span className="text-[15px] font-semibold tracking-[-0.02em] text-white/75 transition-colors group-hover:text-white">
-              {logo.name}
-            </span>
           </li>
         ))}
       </ul>
