@@ -39,7 +39,7 @@ export default function Faq() {
         return (
           <div
             key={item.q}
-            className="dashed reveal rounded-xl bg-white/[0.015]"
+            className="dashed reveal rounded-[4px] bg-white/[0.015]"
             data-delay={i * 50}
           >
             <button
@@ -51,7 +51,7 @@ export default function Faq() {
               <span className="text-[15px] font-medium tracking-[-0.01em] sm:text-[16.5px]">
                 {item.q}
               </span>
-              <span className="relative grid h-7 w-7 shrink-0 place-items-center rounded-full border border-white/10 bg-white/[0.06]">
+              <span className="relative grid h-7 w-7 shrink-0 place-items-center rounded-[3px] border border-white/[0.1] bg-white/[0.04]">
                 <span className="absolute h-px w-3 bg-white" />
                 <span
                   className={`absolute h-px w-3 bg-white transition-transform duration-300 ${

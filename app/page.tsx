@@ -202,7 +202,7 @@ export default function Home() {
       <Reveal />
       <Nav />
 
-      <main id="top" className="relative">
+      <main id="top" className="page-in relative">
         {/* ============================================================ HERO */}
         <section className="relative px-4 pt-16 sm:px-6 sm:pt-[72px]">
           <div className="dashed relative mx-auto w-full max-w-[1200px] overflow-hidden">
@@ -218,9 +218,9 @@ export default function Home() {
             <div className="relative flex min-h-[620px] flex-col items-center justify-center px-5 py-24 sm:min-h-[720px] sm:py-28">
               <a
                 href="#gpus"
-                className="reveal group flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.05] py-1 pr-4 pl-1 backdrop-blur-md transition-colors hover:bg-white/[0.09]"
+                className="reveal group flex items-center gap-2.5 rounded-[4px] border border-white/[0.1] bg-white/[0.04] py-1 pr-4 pl-1 backdrop-blur-md transition-colors hover:border-white/20 hover:bg-white/[0.07]"
               >
-                <span className="rounded-full bg-accent px-2.5 py-1 text-[11.5px] font-bold tracking-[-0.01em] text-black">
+                <span className="rounded-[2px] border border-accent/25 bg-accent/12 px-2 py-1 text-[11px] font-semibold tracking-[0.02em] text-accent">
                   New
                 </span>
                 <span className="text-[12.5px] font-medium text-white/85 sm:text-[13px]">
@@ -262,13 +262,13 @@ export default function Home() {
               >
                 <a
                   href="#cta"
-                  className="w-full rounded-full bg-white px-6 py-3 text-center text-[14px] font-bold tracking-[-0.02em] text-black transition-opacity hover:opacity-85 sm:w-auto"
+                  className="w-full rounded-[4px] bg-white px-6 py-3 text-center text-[13.5px] font-semibold tracking-[-0.01em] text-black transition-colors hover:bg-white/88 sm:w-auto"
                 >
                   Start a job
                 </a>
                 <a
                   href="#gpus"
-                  className="w-full rounded-full border border-white/10 bg-white/[0.09] px-6 py-3 text-center text-[14px] font-bold tracking-[-0.02em] backdrop-blur-md transition-colors hover:bg-white/[0.15] sm:w-auto"
+                  className="w-full rounded-[4px] border border-white/[0.12] bg-white/[0.04] px-6 py-3 text-center text-[13.5px] font-medium tracking-[-0.01em] text-white/85 backdrop-blur-md transition-colors hover:border-white/20 hover:bg-white/[0.08] hover:text-white sm:w-auto"
                 >
                   See GPU pricing
                 </a>
@@ -385,7 +385,7 @@ export default function Home() {
                     }}
                   />
                   <div className="relative">
-                    <div className="mb-6 grid h-10 w-10 place-items-center rounded-full bg-white/[0.07] text-white">
+                    <div className="mb-6 grid h-10 w-10 place-items-center rounded-[4px] border border-white/[0.08] bg-white/[0.04] text-white/80">
                       <Icon>{f.icon}</Icon>
                     </div>
                     <h3 className="text-[19px] font-semibold tracking-[-0.025em] sm:text-[21px]">
@@ -509,7 +509,7 @@ export default function Home() {
                               {row.gpu.replace("NVIDIA ", "")}
                             </span>
                             {row.highlight ? (
-                              <span className="rounded-full border border-accent/25 bg-accent/10 px-2 py-0.5 font-mono text-[10px] tracking-[0.1em] text-accent uppercase">
+                              <span className="rounded-[2px] border border-accent/25 bg-accent/10 px-2 py-0.5 font-mono text-[10px] tracking-[0.1em] text-accent uppercase">
                                 New
                               </span>
                             ) : null}
@@ -622,13 +622,13 @@ export default function Home() {
               >
                 <a
                   href="#top"
-                  className="w-full rounded-full bg-white px-7 py-3.5 text-center text-[14px] font-bold tracking-[-0.02em] text-black transition-opacity hover:opacity-85 sm:w-auto"
+                  className="w-full rounded-[4px] bg-white px-7 py-3.5 text-center text-[13.5px] font-semibold tracking-[-0.01em] text-black transition-colors hover:bg-white/88 sm:w-auto"
                 >
                   Get started free
                 </a>
                 <a
                   href="#gpus"
-                  className="w-full rounded-full border border-white/10 bg-white/[0.09] px-7 py-3.5 text-center text-[14px] font-bold tracking-[-0.02em] backdrop-blur-md transition-colors hover:bg-white/[0.15] sm:w-auto"
+                  className="w-full rounded-[4px] border border-white/[0.12] bg-white/[0.04] px-7 py-3.5 text-center text-[13.5px] font-medium tracking-[-0.01em] text-white/85 backdrop-blur-md transition-colors hover:border-white/20 hover:bg-white/[0.08] hover:text-white sm:w-auto"
                 >
                   Talk to us
                 </a>

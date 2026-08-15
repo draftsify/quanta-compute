@@ -67,7 +67,7 @@ const SOCIALS = [
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-white/[0.06]">
+    <footer className="page-in relative border-t border-white/[0.06]">
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-6">
         {/* Logo band */}
         <div className="flex items-center justify-between gap-6 py-10">
@@ -88,7 +88,7 @@ export default function Footer() {
               </p>
             </div>
           </div>
-          <div className="hidden items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-3.5 py-2 sm:flex">
+          <div className="hidden items-center gap-2 rounded-[4px] border border-white/[0.08] bg-white/[0.03] px-3.5 py-2 sm:flex">
             <span className="live-dot h-1.5 w-1.5 rounded-full bg-accent" />
             <span className="font-mono text-[11.5px] tracking-[0.06em] text-muted uppercase">
               All systems operational
@@ -133,11 +133,11 @@ export default function Footer() {
                 required
                 placeholder="you@company.com"
                 aria-label="Email address"
-                className="h-10 min-w-0 flex-1 rounded-[10px] border border-white/10 bg-white/[0.04] px-3 text-[13.5px] outline-none transition-colors placeholder:text-faint focus:border-white/25"
+                className="h-10 min-w-0 flex-1 rounded-[4px] border border-white/[0.12] bg-white/[0.03] px-3 text-[13.5px] outline-none transition-colors placeholder:text-faint focus:border-white/25"
               />
               <button
                 type="submit"
-                className="h-10 shrink-0 rounded-[10px] bg-white px-4 text-[13.5px] font-bold text-black transition-opacity hover:opacity-85"
+                className="h-10 shrink-0 rounded-[4px] border border-white/[0.14] bg-white/[0.07] px-4 text-[13.5px] font-medium text-white/90 transition-colors hover:border-white/25 hover:bg-white/[0.12] hover:text-white"
               >
                 Join
               </button>
@@ -160,7 +160,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label={s.label}
-                className="grid h-9 w-9 place-items-center rounded-[10px] border border-white/[0.07] bg-white/[0.02] text-muted transition-colors hover:border-white/20 hover:text-white"
+                className="grid h-9 w-9 place-items-center rounded-[4px] border border-white/[0.07] bg-white/[0.02] text-muted transition-colors hover:border-white/20 hover:text-white"
               >
                 <svg
                   viewBox="0 0 24 24"
