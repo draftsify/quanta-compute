@@ -12,7 +12,7 @@ export default function LogoCloud() {
         {LOGOS.map((logo, i) => (
           <li
             key={logo.name}
-            className="frame reveal group flex h-[86px] items-center justify-center gap-2.5 px-4 transition-colors hover:border-white/15"
+            className="frame logo-cell reveal group flex h-[86px] items-center justify-center gap-2.5 px-4 transition-colors hover:border-white/15"
             data-delay={(i % 4) * 60}
           >
             <svg

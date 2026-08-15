@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const EASE = 0.11; // lerp factor per frame — lower is heavier
+const EASE = 0.085; // lerp factor per frame — lower is heavier
 const NAV_OFFSET = 88;
 
 /**

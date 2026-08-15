@@ -265,6 +265,46 @@ body {
   will-change: transform;
 }
 
+/* ---------- Scroll-driven entrance ----------
+   Where the browser supports scroll timelines, every panel is tied directly to
+   the scroll position instead of firing once on an observer callback: the whole
+   page eases in and out with the wheel rather than snapping at a threshold. */
+@keyframes scroll-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* The observer-driven fallback stands down. */
+    .reveal {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      transition: none;
+      will-change: auto;
+    }
+
+    main > section .frame,
+    main > section .logo-cell {
+      animation: scroll-in linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 22%;
+    }
+
+    /* The hero is already on screen at load — it must not start hidden. */
+    main > section:first-of-type .frame {
+      animation: none;
+    }
+  }
+}
+
 /* ---------- Reveal on scroll ---------- */
 .reveal {
   opacity: 0;

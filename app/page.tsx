@@ -4,13 +4,7 @@ import Footer from "@/components/Footer";
 import HalftoneBackground from "@/components/HalftoneBackground";
 import LogoCloud from "@/components/LogoCloud";
 import Nav from "@/components/Nav";
-import NvidiaMark from "@/components/NvidiaMark";
-import {
-  AgentRails,
-  DeployChips,
-  RunBars,
-  SshSession,
-} from "@/components/ProductVisuals";
+import { AgentRails, DeployChips } from "@/components/ProductVisuals";
 import Reveal from "@/components/Reveal";
 
 /* ------------------------------------------------------------------ data */
@@ -41,26 +35,12 @@ const PRODUCTS = [
   {
     title: "AI agent runs",
     body: "Give agents GPU tools, logs and a clean runtime for research, automation and evaluation.",
-    tags: ["Agents", "Tools", "Logs"],
     Visual: AgentRails,
   },
   {
     title: "One-click deploys",
     body: "Start from a model or skill, pick capacity and launch a run without building cloud glue.",
-    tags: ["Models", "Skills", "Deploy"],
     Visual: DeployChips,
-  },
-  {
-    title: "Machine learning for startups",
-    body: "Prototype, fine-tune and validate models without buying hardware or reserving clusters.",
-    tags: ["Fine-tune", "Batch", "Eval"],
-    Visual: RunBars,
-  },
-  {
-    title: "Private GPU sessions",
-    body: "Open SSH, stream logs and close the job when the workload is complete.",
-    tags: ["SSH", "Terminal", "Receipts"],
-    Visual: SshSession,
   },
 ];
 
@@ -129,48 +109,6 @@ const INCLUDED = [
     ),
   },
 ];
-
-const GPU_CLASSES = [
-  {
-    gpu: "H200",
-    vram: "141 GB HBM3e",
-    net: "3.2 Tb/s NVLink",
-    best: "Frontier model training",
-    tag: "New",
-  },
-  {
-    gpu: "H100 SXM5",
-    vram: "80 GB HBM3",
-    net: "900 GB/s NVLink",
-    best: "Distributed training",
-  },
-  {
-    gpu: "H100 PCIe",
-    vram: "80 GB HBM3",
-    net: "64 GB/s PCIe 5.0",
-    best: "Inference at scale",
-  },
-  {
-    gpu: "A100",
-    vram: "80 GB HBM2e",
-    net: "600 GB/s NVLink",
-    best: "Fine-tuning, HPC",
-  },
-  {
-    gpu: "L40S",
-    vram: "48 GB GDDR6",
-    net: "64 GB/s PCIe 4.0",
-    best: "Inference, rendering",
-  },
-  {
-    gpu: "RTX 4090",
-    vram: "24 GB GDDR6X",
-    net: "32 GB/s PCIe 4.0",
-    best: "Agents, prototyping",
-  },
-];
-
-const CATALOG_TABS = ["Models", "Skills", "Blueprints", "GPUs"];
 
 const WORKLOADS = [
   {
@@ -325,7 +263,7 @@ export default function Home() {
                   Create account
                 </a>
                 <a
-                  href="#index"
+                  href="#products"
                   className="w-full rounded-[6px] border border-white/[0.14] bg-black/40 px-6 py-3 text-center text-[13.5px] font-medium tracking-[-0.01em] text-white/85 transition-colors hover:border-white/25 hover:bg-white/[0.06] hover:text-white sm:w-auto"
                 >
                   Search models
@@ -349,7 +287,7 @@ export default function Home() {
               id="products"
               eyebrow="Products"
               title="Use compute when the work needs it."
-              sub="Use Quanta for agent runs, model deploys, startup ML experiments and private GPU sessions. Keep every run scoped, priced and easy to close."
+              sub="Use Quanta for agent runs and model deploys. Keep every run scoped, priced and easy to close."
             />
 
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
@@ -368,13 +306,6 @@ export default function Home() {
                     <p className="mt-3 max-w-[46ch] text-[14.5px] leading-[1.65] text-muted">
                       {p.body}
                     </p>
-                    <ul className="mt-6 flex flex-wrap gap-2">
-                      {p.tags.map((tag) => (
-                        <li key={tag}>
-                          <Tag>{tag}</Tag>
-                        </li>
-                      ))}
-                    </ul>
                   </div>
                 </article>
               ))}
@@ -410,117 +341,6 @@ export default function Home() {
                   </p>
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ===================================================== MODEL INDEX */}
-        <section className="mt-3 px-4 sm:px-6">
-          <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-3">
-            <SectionHeading
-              id="index"
-              eyebrow="Model index"
-              title="Search the model. Launch the job."
-              sub="Start from a model, skill or blueprint, then pick the GPU class that fits the workload."
-            />
-
-            <div className="frame reveal p-5 sm:p-6">
-              <div className="frame frame-quiet flex items-center gap-3 px-4 py-3">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  className="h-4 w-4 shrink-0 text-faint"
-                  aria-hidden="true"
-                >
-                  <circle cx="11" cy="11" r="6.5" />
-                  <path d="m16 16 4 4" strokeLinecap="round" />
-                </svg>
-                <span className="text-[14px] text-faint">
-                  Search a model family, task type or runtime name
-                </span>
-              </div>
-              <ul className="mt-4 flex flex-wrap gap-2">
-                {CATALOG_TABS.map((tab, i) => (
-                  <li key={tab}>
-                    <Tag tone={i === 3 ? "accent" : "quiet"}>{tab}</Tag>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="frame reveal" data-delay="80">
-              <div className="overflow-hidden rounded-[10px]">
-                <div className="overflow-x-auto">
-                  <table className="w-full min-w-[680px] border-collapse text-left">
-                    <thead>
-                      <tr className="border-b border-white/[0.07]">
-                        {[
-                          "GPU class",
-                          "Memory",
-                          "Interconnect",
-                          "Best for",
-                          "Price",
-                        ].map((h) => (
-                          <th
-                            key={h}
-                            className={`px-5 py-4 text-[11.5px] font-semibold tracking-[0.12em] text-faint uppercase sm:px-6 ${
-                              h === "Price" ? "text-right" : ""
-                            }`}
-                          >
-                            {h}
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {GPU_CLASSES.map((row) => (
-                        <tr
-                          key={row.gpu}
-                          className="border-b border-white/[0.05] transition-colors last:border-0 hover:bg-white/[0.02]"
-                        >
-                          <td className="px-5 py-5 sm:px-6">
-                            <div className="flex items-center gap-3">
-                              <NvidiaMark className="h-4 w-4 shrink-0 text-[#76b900]" />
-                              <span className="text-[14.5px] font-medium tracking-[-0.01em] whitespace-nowrap">
-                                {row.gpu}
-                              </span>
-                              {row.tag ? (
-                                <Tag tone="accent">{row.tag}</Tag>
-                              ) : null}
-                            </div>
-                          </td>
-                          <td className="px-5 py-5 text-[13.5px] whitespace-nowrap text-muted sm:px-6">
-                            {row.vram}
-                          </td>
-                          <td className="px-5 py-5 text-[13.5px] whitespace-nowrap text-muted sm:px-6">
-                            {row.net}
-                          </td>
-                          <td className="px-5 py-5 text-[13.5px] whitespace-nowrap text-muted sm:px-6">
-                            {row.best}
-                          </td>
-                          <td className="px-5 py-5 text-right text-[13.5px] whitespace-nowrap text-white/55 sm:px-6">
-                            Quoted per job
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                <div className="flex flex-col items-center justify-between gap-3 border-t border-white/[0.07] px-5 py-4 sm:flex-row sm:px-6">
-                  <p className="text-[12.5px] text-faint">
-                    Review the job price and approve payment with your wallet
-                    before anything runs.
-                  </p>
-                  <a
-                    href="#process"
-                    className="text-[13px] font-medium text-accent transition-opacity hover:opacity-80"
-                  >
-                    See the process →
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
         </section>
@@ -747,7 +567,7 @@ export default function Home() {
                   Create account
                 </a>
                 <a
-                  href="#index"
+                  href="#products"
                   className="w-full rounded-[6px] border border-white/[0.14] bg-black/40 px-7 py-3.5 text-center text-[13.5px] font-medium tracking-[-0.01em] text-white/85 transition-colors hover:border-white/25 hover:bg-white/[0.06] hover:text-white sm:w-auto"
                 >
                   Search models

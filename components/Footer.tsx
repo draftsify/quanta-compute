@@ -5,11 +5,11 @@ const COLUMNS = [
     title: "Compute",
     links: [
       { label: "Compute on demand", href: "#products" },
-      { label: "NVIDIA catalog", href: "#index" },
+      { label: "NVIDIA catalog", href: "#" },
       { label: "Process", href: "#process" },
-      { label: "Models", href: "#index" },
-      { label: "Skills", href: "#index" },
-      { label: "Blueprints", href: "#index" },
+      { label: "Models", href: "#" },
+      { label: "Skills", href: "#" },
+      { label: "Blueprints", href: "#" },
       { label: "Wallet access", href: "#payment" },
       { label: "Create account", href: "#cta" },
     ],
@@ -31,9 +31,9 @@ const COLUMNS = [
   {
     title: "Network",
     links: [
-      { label: "NVIDIA models", href: "#index" },
-      { label: "NVIDIA skills", href: "#index" },
-      { label: "NVIDIA blueprints", href: "#index" },
+      { label: "NVIDIA models", href: "#" },
+      { label: "NVIDIA skills", href: "#" },
+      { label: "NVIDIA blueprints", href: "#" },
       { label: "Dexscreener", href: "https://dexscreener.com" },
       { label: "GitHub", href: "https://github.com" },
       { label: "X", href: "https://x.com" },
