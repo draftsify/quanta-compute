@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import Footer from "@/components/Footer";
 import HalftoneBackground from "@/components/HalftoneBackground";
 import LogoCloud from "@/components/LogoCloud";
@@ -160,32 +158,8 @@ export default function Home() {
             </div>
 
             <div className="relative flex min-h-[560px] flex-col items-center justify-center px-5 py-24 sm:min-h-[640px] sm:py-28">
-              {/* Same panel and tag treatment as every other block on the page;
-                  only the fill is darker so it holds up over the halftone.
-                  The tag sits collapsed around the mark and opens on hover —
-                  the 0fr/1fr grid track animates to the label's own width, so
-                  nothing has to be measured. */}
-              <div className="frame reveal group flex items-center bg-black/55 p-1.5">
-                <span className="flex items-center rounded-[4px] border border-accent/25 bg-accent/10 px-2 py-1.5">
-                  <Image
-                    src="/logo.png"
-                    alt="Quanta"
-                    width={14}
-                    height={14}
-                    className="h-3.5 w-3.5 shrink-0"
-                  />
-                  <span className="grid grid-cols-[0fr] transition-[grid-template-columns] duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:grid-cols-[1fr]">
-                    <span className="overflow-hidden">
-                      <span className="block pl-2 text-[11px] font-medium tracking-[0.06em] whitespace-nowrap text-accent uppercase opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-hover:delay-150">
-                        Quanta GPU cloud
-                      </span>
-                    </span>
-                  </span>
-                </span>
-              </div>
-
               <h1
-                className="reveal mt-8 text-center text-[46px] leading-[1.02] font-semibold tracking-[-0.045em] text-balance sm:text-[76px] lg:text-[92px]"
+                className="reveal text-center text-[46px] leading-[1.02] font-semibold tracking-[-0.045em] text-balance sm:text-[76px] lg:text-[92px]"
                 data-delay="60"
               >
                 <span className="text-hero-gradient">Compute on demand.</span>
@@ -205,7 +179,7 @@ export default function Home() {
                 data-delay="220"
               >
                 <a
-                  href="#cta"
+                  href="/create-account"
                   className="w-full rounded-[6px] bg-white px-6 py-3 text-center text-[13.5px] font-semibold tracking-[-0.01em] text-black transition-colors hover:bg-white/88 sm:w-auto"
                 >
                   Create account
@@ -317,7 +291,7 @@ export default function Home() {
                 data-delay="120"
               >
                 <a
-                  href="#top"
+                  href="/create-account"
                   className="w-full rounded-[6px] bg-white px-7 py-3.5 text-center text-[13.5px] font-semibold tracking-[-0.01em] text-black transition-colors hover:bg-white/88 sm:w-auto"
                 >
                   Create account

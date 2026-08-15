@@ -11,7 +11,7 @@ const COLUMNS = [
       { label: "Skills", href: "#" },
       { label: "Blueprints", href: "#" },
       { label: "Wallet access", href: "#" },
-      { label: "Create account", href: "#cta" },
+      { label: "Create account", href: "/create-account" },
     ],
   },
   {
