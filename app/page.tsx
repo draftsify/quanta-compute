@@ -1,5 +1,6 @@
+import Image from "next/image";
+
 import CopyAddress from "@/components/CopyAddress";
-import Faq from "@/components/Faq";
 import Footer from "@/components/Footer";
 import HalftoneBackground from "@/components/HalftoneBackground";
 import LogoCloud from "@/components/LogoCloud";
@@ -10,26 +11,6 @@ import Reveal from "@/components/Reveal";
 /* ------------------------------------------------------------------ data */
 
 export const TOKEN_ADDRESS = "HdeAPoHivsm9MZfeY5tW7apJEprc8Fs594bWmnzfpump";
-
-const LAUNCH_PATH = [
-  {
-    step: "Search",
-    detail: "Find a model, skill or workload template that matches the job.",
-  },
-  {
-    step: "Rent",
-    detail: "Choose GPU capacity and approve the quote before anything runs.",
-  },
-  {
-    step: "Run",
-    detail: "Open logs, SSH or terminal access while the job is active.",
-  },
-  {
-    step: "Settle",
-    detail:
-      "Pay for completed compute and return unused balance to the wallet.",
-  },
-];
 
 const PRODUCTS = [
   {
@@ -110,31 +91,6 @@ const INCLUDED = [
   },
 ];
 
-const WORKLOADS = [
-  {
-    k: "Agent workloads",
-    v: "Long-running tool use, browser tasks and evaluation loops",
-  },
-  {
-    k: "Model deploys",
-    v: "Inference, embeddings, voice, vision and reranking jobs",
-  },
-  {
-    k: "Startup ML",
-    v: "Fine-tuning, dataset tests, demos and product validation",
-  },
-  {
-    k: "Provider capacity",
-    v: "GPU supply, usage receipts, health and settlement",
-  },
-];
-
-const WALLETS = [
-  { name: "Phantom", status: "Supported" },
-  { name: "Solflare", status: "Supported" },
-  { name: "Fuse", status: "Later release" },
-];
-
 /* ------------------------------------------------------------- primitives */
 
 function SectionHeading({
@@ -185,26 +141,6 @@ function Icon({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Tag({
-  children,
-  tone = "quiet",
-}: {
-  children: React.ReactNode;
-  tone?: "quiet" | "accent";
-}) {
-  return (
-    <span
-      className={`rounded-[4px] border px-2.5 py-1 text-[11px] font-medium tracking-[0.06em] uppercase ${
-        tone === "accent"
-          ? "border-accent/25 bg-accent/10 text-accent"
-          : "border-white/[0.09] bg-white/[0.02] text-white/45"
-      }`}
-    >
-      {children}
-    </span>
-  );
-}
-
 /* ------------------------------------------------------------------ page */
 
 export default function Home() {
@@ -228,9 +164,27 @@ export default function Home() {
 
             <div className="relative flex min-h-[560px] flex-col items-center justify-center px-5 py-24 sm:min-h-[640px] sm:py-28">
               {/* Same panel and tag treatment as every other block on the page;
-                  only the fill is darker so it holds up over the halftone. */}
-              <div className="frame reveal flex items-center gap-2.5 bg-black/55 p-1.5 pr-4">
-                <Tag tone="accent">Quanta GPU cloud</Tag>
+                  only the fill is darker so it holds up over the halftone.
+                  The tag sits collapsed around the mark and opens on hover —
+                  the 0fr/1fr grid track animates to the label's own width, so
+                  nothing has to be measured. */}
+              <div className="frame reveal group flex items-center gap-2.5 bg-black/55 p-1.5 pr-4">
+                <span className="flex items-center gap-0 rounded-[4px] border border-accent/25 bg-accent/10 px-2 py-1.5">
+                  <Image
+                    src="/logo.png"
+                    alt="Quanta"
+                    width={14}
+                    height={14}
+                    className="h-3.5 w-3.5 shrink-0"
+                  />
+                  <span className="grid grid-cols-[0fr] transition-[grid-template-columns] duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:grid-cols-[1fr]">
+                    <span className="overflow-hidden">
+                      <span className="block pl-2 text-[11px] font-medium tracking-[0.06em] whitespace-nowrap text-accent uppercase opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-hover:delay-150">
+                        Quanta GPU cloud
+                      </span>
+                    </span>
+                  </span>
+                </span>
                 <span className="text-[12.5px] font-medium text-white/65 sm:text-[13px]">
                   Public access opens after final testing
                 </span>
@@ -345,128 +299,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ========================================================= PROCESS */}
-        <section className="mt-3 px-4 sm:px-6">
-          <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-3">
-            <SectionHeading
-              id="process"
-              eyebrow="How it works"
-              title="From model idea to paid compute job."
-              sub="Quanta keeps the path short. Search, rent, run and settle without switching between cloud consoles, wallet tools and terminal scripts."
-            />
-
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {LAUNCH_PATH.map((s, i) => (
-                <div
-                  key={s.step}
-                  className="frame reveal px-6 py-10 sm:px-7 sm:py-11"
-                  data-delay={i * 70}
-                >
-                  <span className="text-[12.5px] font-semibold tracking-[0.16em] text-accent">
-                    0{i + 1}
-                  </span>
-                  <h3 className="mt-5 text-[19px] font-semibold tracking-[-0.025em]">
-                    {s.step}
-                  </h3>
-                  <p className="mt-3 text-[14.5px] leading-[1.65] text-muted">
-                    {s.detail}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <div className="frame reveal">
-              <div className="overflow-hidden rounded-[10px]">
-                <div className="flex items-center gap-2 border-b border-white/[0.06] px-5 py-3">
-                  <span className="h-2.5 w-2.5 rounded-full bg-white/12" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-white/12" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-white/12" />
-                  <span className="ml-2 text-[11.5px] font-semibold tracking-[0.12em] text-faint uppercase">
-                    quanta-cli
-                  </span>
-                </div>
-                <pre className="overflow-x-auto px-5 py-6 font-mono text-[12.5px] leading-[1.9] sm:px-8 sm:text-[13.5px]">
-                  <code>
-                    <span className="text-accent">$</span>{" "}
-                    <span className="text-white">quanta search</span>{" "}
-                    llama-3.1-70b
-                    {"\n"}
-                    <span className="text-white/35">
-                      → 3 runtimes · vllm, tensorrt-llm, nim
-                    </span>
-                    {"\n\n"}
-                    <span className="text-accent">$</span>{" "}
-                    <span className="text-white">quanta run</span>{" "}
-                    <span className="text-white/45">--gpu</span> h100:2{" "}
-                    <span className="text-white/45">--max-spend</span> 25{" "}
-                    <span className="text-white/45">\</span>
-                    {"\n"}
-                    {"    "}
-                    <span className="text-white/45">
-                      --model
-                    </span> llama-3.1-70b{" "}
-                    <span className="text-white/45">--runtime</span> vllm
-                    {"\n"}
-                    <span className="text-white/35">
-                      → quote approved in wallet · job qx_8f3a21 live
-                    </span>
-                    {"\n"}
-                    <span className="text-white/35">
-                      → ssh quanta@qx_8f3a21 · streaming logs…
-                    </span>
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ========================================================= PAYMENT */}
-        <section className="mt-3 px-4 sm:px-6">
-          <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-3">
-            <SectionHeading
-              id="payment"
-              eyebrow="Wallet payment"
-              title="Pay for compute when the job runs."
-              sub="Connect Phantom, Solflare or Fuse, fund the run and settle usage from the wallet attached to the account."
-            />
-
-            <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
-              {WALLETS.map((w, i) => (
-                <div
-                  key={w.name}
-                  className="frame reveal flex items-center justify-between gap-4 px-6 py-7"
-                  data-delay={i * 60}
-                >
-                  <span className="text-[16px] font-semibold tracking-[-0.02em]">
-                    {w.name}
-                  </span>
-                  <Tag tone={w.status === "Supported" ? "accent" : "quiet"}>
-                    {w.status}
-                  </Tag>
-                </div>
-              ))}
-            </div>
-
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-              {WORKLOADS.map((w, i) => (
-                <div
-                  key={w.k}
-                  className="frame reveal px-6 py-8 sm:px-7"
-                  data-delay={(i % 2) * 60}
-                >
-                  <h3 className="text-[16px] font-semibold tracking-[-0.02em]">
-                    {w.k}
-                  </h3>
-                  <p className="mt-2 text-[14px] leading-[1.6] text-muted">
-                    {w.v}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* =========================================================== TOKEN */}
         <section className="mt-3 px-4 sm:px-6">
           <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-3">
@@ -522,18 +354,6 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* ============================================================ FAQ */}
-        <section className="mt-3 px-4 sm:px-6">
-          <div className="mx-auto flex w-full max-w-[860px] flex-col gap-3">
-            <SectionHeading
-              id="faq"
-              eyebrow="FAQ"
-              title="Short answers for builders and providers."
-            />
-            <Faq />
           </div>
         </section>
 
