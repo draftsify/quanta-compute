@@ -108,10 +108,12 @@ export default function CreateAccount() {
 
           <div className="flex flex-col gap-2.5">
             {PROVIDERS.map((p) => (
+              // The icon and hint are taken out of flow so every provider's
+              // icon lands on the same x and the labels stay centred.
               <button
                 key={p.label}
                 type="button"
-                className="flex h-11 w-full items-center justify-center gap-2.5 rounded-[6px] border border-white/[0.12] bg-white/[0.04] text-[13.5px] font-medium text-white/85 transition-colors hover:border-white/25 hover:bg-white/[0.08] hover:text-white"
+                className="relative flex h-11 w-full items-center justify-center rounded-[6px] border border-white/[0.12] bg-white/[0.04] px-14 text-[13.5px] font-medium text-white/85 transition-colors hover:border-white/25 hover:bg-white/[0.08] hover:text-white"
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -120,14 +122,16 @@ export default function CreateAccount() {
                   strokeWidth={p.stroke ? 1.5 : undefined}
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="h-4 w-4"
+                  className="absolute left-4 h-4 w-4"
                   aria-hidden="true"
                 >
                   {p.icon}
                 </svg>
                 {p.label}
                 {p.hint ? (
-                  <span className="text-[11.5px] text-faint">{p.hint}</span>
+                  <span className="absolute right-4 text-[11.5px] text-faint">
+                    {p.hint}
+                  </span>
                 ) : null}
               </button>
             ))}
