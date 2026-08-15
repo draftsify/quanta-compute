@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #000000;
+  --color-surface: #0a0a0a;
+  --color-elevated: #111111;
+  --color-line: #1f1f1f;
+  --color-muted: rgba(255, 255, 255, 0.5);
+  --color-faint: rgba(255, 255, 255, 0.32);
+  --color-accent: #74e88a;
+  --color-accent-dim: #3f7f4d;
+
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-jb), ui-monospace, SFMono-Regular, monospace;
+
+  --breakpoint-xs: 30rem;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: #000;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(116, 232, 138, 0.25);
+  color: #fff;
+}
+
+/* ---------- Dashed frame (Framer-style marching container) ---------- */
+.dashed {
+  position: relative;
+}
+.dashed::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px dashed var(--color-line);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.dashed-t::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    90deg,
+    var(--color-line) 0,
+    var(--color-line) 12px,
+    transparent 12px,
+    transparent 18px
+  );
+  background-size: 18px 1px;
+}
+
+/* ---------- Grid dot mask used behind hero ---------- */
+.mask-fade-b {
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    #000 28%,
+    rgba(0, 0, 0, 0.4) 62%,
+    transparent 92%
+  );
+  mask-image: linear-gradient(180deg, #000 28%, rgba(0, 0, 0, 0.4) 62%, transparent 92%);
+}
+.mask-fade-edges {
+  -webkit-mask-image: radial-gradient(120% 100% at 50% 0%, #000 35%, transparent 82%);
+  mask-image: radial-gradient(120% 100% at 50% 0%, #000 35%, transparent 82%);
+}
+
+/* ---------- Text gradient like the reference hero ---------- */
+.text-hero-gradient {
+  background-image: radial-gradient(60% 90% at 50% 110%, #8a8a8a 0%, #ffffff 78%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Reveal on scroll ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  filter: blur(4px);
+  transition:
+    opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---------- Marquee ---------- */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 38s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* ---------- Subtle pulse for the live dot ---------- */
+@keyframes softpulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(116, 232, 138, 0.45);
+  }
+  50% {
+    opacity: 0.65;
+    box-shadow: 0 0 0 5px rgba(116, 232, 138, 0);
+  }
+}
+.live-dot {
+  animation: softpulse 2.4s ease-in-out infinite;
+}
+
+/* ---------- Accordion ---------- */
+.faq-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.faq-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+.faq-panel > div {
+  overflow: hidden;
+}
