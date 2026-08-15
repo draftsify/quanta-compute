@@ -9,3 +9,5 @@ next-env.d.ts
 .shots
 .server.log
 .server.err
+
+.vercel
