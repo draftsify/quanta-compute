@@ -283,11 +283,11 @@ export default function Home() {
             </div>
 
             <div className="relative flex min-h-[560px] flex-col items-center justify-center px-5 py-24 sm:min-h-[640px] sm:py-28">
-              <div className="reveal flex items-center gap-2.5 rounded-[6px] border border-white/[0.1] bg-black/40 py-1 pr-4 pl-1">
-                <span className="rounded-[4px] border border-accent/25 bg-accent/12 px-2 py-1 text-[11px] font-semibold tracking-[0.02em] text-accent">
-                  Quanta GPU cloud
-                </span>
-                <span className="text-[12.5px] font-medium text-white/80 sm:text-[13px]">
+              {/* Same panel and tag treatment as every other block on the page;
+                  only the fill is darker so it holds up over the halftone. */}
+              <div className="frame reveal flex items-center gap-2.5 bg-black/55 p-1.5 pr-4">
+                <Tag tone="accent">Quanta GPU cloud</Tag>
+                <span className="text-[12.5px] font-medium text-white/65 sm:text-[13px]">
                   Public access opens after final testing
                 </span>
               </div>
