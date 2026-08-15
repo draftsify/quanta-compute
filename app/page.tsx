@@ -5,6 +5,12 @@ import HalftoneBackground from "@/components/HalftoneBackground";
 import LogoCloud from "@/components/LogoCloud";
 import Nav from "@/components/Nav";
 import NvidiaMark from "@/components/NvidiaMark";
+import {
+  AgentRails,
+  DeployChips,
+  RunBars,
+  SshSession,
+} from "@/components/ProductVisuals";
 import Reveal from "@/components/Reveal";
 
 /* ------------------------------------------------------------------ data */
@@ -37,24 +43,28 @@ const PRODUCTS = [
     body: "Give agents GPU tools, logs and a clean runtime for research, automation and evaluation.",
     tags: ["Agents", "Tools", "Logs"],
     glow: "rgb(116,232,138)",
+    Visual: AgentRails,
   },
   {
     title: "One-click deploys",
     body: "Start from a model or skill, pick capacity and launch a run without building cloud glue.",
     tags: ["Models", "Skills", "Deploy"],
     glow: "rgb(153,238,255)",
+    Visual: DeployChips,
   },
   {
     title: "Machine learning for startups",
     body: "Prototype, fine-tune and validate models without buying hardware or reserving clusters.",
     tags: ["Fine-tune", "Batch", "Eval"],
     glow: "rgb(255,195,0)",
+    Visual: RunBars,
   },
   {
     title: "Private GPU sessions",
     body: "Open SSH, stream logs and close the job when the workload is complete.",
     tags: ["SSH", "Terminal", "Receipts"],
     glow: "rgb(169,86,247)",
+    Visual: SshSession,
   },
 ];
 
@@ -360,6 +370,7 @@ export default function Home() {
                     }}
                   />
                   <div className="relative">
+                    <p.Visual />
                     <h3 className="text-[19px] font-semibold tracking-[-0.025em] sm:text-[21px]">
                       {p.title}
                     </h3>
