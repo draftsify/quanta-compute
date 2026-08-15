@@ -100,84 +100,142 @@ body {
   color: transparent;
 }
 
-/* ---------- Whole-page blur-in on load ---------- */
+/* ---------- Whole-page blur-in on load ----------
+   The blur lives on a fixed veil rather than on the page itself: filtering a
+   6000px-tall element would force a full-page offscreen buffer on first paint,
+   while the veil only ever covers the viewport. */
+@keyframes intro-veil {
+  from {
+    opacity: 1;
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  99% {
+    opacity: 0;
+    -webkit-backdrop-filter: blur(0px);
+    backdrop-filter: blur(0px);
+    background-color: rgba(0, 0, 0, 0);
+    visibility: visible;
+  }
+  to {
+    visibility: hidden;
+  }
+}
+.intro-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  animation: intro-veil 1000ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
 @keyframes page-in {
   from {
     opacity: 0;
-    filter: blur(14px);
-    transform: translateY(8px) scale(1.006);
-  }
-  60% {
-    opacity: 1;
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
-    filter: blur(0);
     transform: none;
   }
 }
 .page-in {
-  /* `backwards` so no filter/containing-block lingers once it has played. */
-  animation: page-in 1050ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation: page-in 950ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
 }
 
-/* ---------- Liquid glass ---------- */
+/* ---------- Liquid glass (dark) ---------- */
 .glass {
   background:
     linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.085) 0%,
-      rgba(255, 255, 255, 0.035) 55%,
-      rgba(255, 255, 255, 0.05) 100%
+      rgba(255, 255, 255, 0.045) 0%,
+      rgba(255, 255, 255, 0.012) 60%,
+      rgba(255, 255, 255, 0.03) 100%
     ),
-    rgba(10, 10, 10, 0.55);
-  -webkit-backdrop-filter: blur(22px) saturate(180%);
-  backdrop-filter: blur(22px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+    rgba(5, 5, 5, 0.88);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.16),
-    inset 0 -1px 0 0 rgba(255, 255, 255, 0.04),
-    inset 1px 0 0 0 rgba(255, 255, 255, 0.05),
-    inset -1px 0 0 0 rgba(255, 255, 255, 0.05),
-    0 10px 34px -14px rgba(0, 0, 0, 0.95);
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.075),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.02),
+    0 14px 36px -18px rgba(0, 0, 0, 1);
+  isolation: isolate;
+  overflow: hidden;
 }
 
-/* Slow specular drift so the surface reads as liquid, not flat frosting. */
-.glass::before {
+/* Specular band travelling across the surface — transform-only, so it rides
+   the compositor instead of repainting a gradient every frame. */
+.glass::after {
   content: "";
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
+  top: 0;
+  left: -60%;
+  height: 100%;
+  width: 55%;
   pointer-events: none;
-  background:
-    radial-gradient(
-      70% 220% at var(--sheen-x, 18%) -40%,
-      rgba(255, 255, 255, 0.17) 0%,
-      transparent 62%
-    ),
-    radial-gradient(
-      60% 200% at 88% 140%,
-      rgba(255, 255, 255, 0.07) 0%,
-      transparent 60%
-    );
-  animation: sheen 11s ease-in-out infinite alternate;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.035) 45%,
+    rgba(255, 255, 255, 0.055) 55%,
+    transparent 100%
+  );
+  animation: sheen 9s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  will-change: transform;
 }
 
 @keyframes sheen {
-  from {
-    --sheen-x: 14%;
-    opacity: 0.85;
+  0% {
+    transform: translateX(0);
   }
-  to {
-    --sheen-x: 86%;
-    opacity: 1;
+  55%,
+  100% {
+    transform: translateX(320%);
   }
 }
 
-@property --sheen-x {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 18%;
+/* ---------- Halftone screen ---------- */
+.halftone {
+  --dot: 7px;
+  --r: 1.5px;
+  -webkit-mask-image:
+    radial-gradient(circle at center, #000 var(--r), transparent calc(var(--r) + 0.4px)),
+    radial-gradient(circle at center, #000 var(--r), transparent calc(var(--r) + 0.4px));
+  mask-image:
+    radial-gradient(circle at center, #000 var(--r), transparent calc(var(--r) + 0.4px)),
+    radial-gradient(circle at center, #000 var(--r), transparent calc(var(--r) + 0.4px));
+  -webkit-mask-size:
+    var(--dot) var(--dot),
+    var(--dot) var(--dot);
+  mask-size:
+    var(--dot) var(--dot),
+    var(--dot) var(--dot);
+  -webkit-mask-position:
+    0 0,
+    calc(var(--dot) / 2) calc(var(--dot) / 2);
+  mask-position:
+    0 0,
+    calc(var(--dot) / 2) calc(var(--dot) / 2);
+  -webkit-mask-repeat: repeat, repeat;
+  mask-repeat: repeat, repeat;
+}
+
+@keyframes drift {
+  0% {
+    transform: scale(1.06) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.12) translate3d(-1.4%, -1%, 0);
+  }
+  100% {
+    transform: scale(1.06) translate3d(0, 0, 0);
+  }
+}
+.drift {
+  animation: drift 46s ease-in-out infinite;
+  will-change: transform;
 }
 
 /* ---------- Reveal on scroll ---------- */
@@ -195,6 +253,8 @@ body {
   opacity: 1;
   transform: none;
   filter: none;
+  /* Drop the compositing hint once the element has landed. */
+  will-change: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -205,7 +265,14 @@ body {
     transition: none;
   }
   .page-in,
-  .glass::before {
+  .glass::after,
+  .drift {
+    animation: none;
+  }
+  .intro-veil {
+    display: none;
+  }
+  .marquee-track {
     animation: none;
   }
   html {

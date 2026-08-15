@@ -17,21 +17,22 @@ const jetbrains = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://quanta-compute.vercel.app"),
-  title: "Quanta Compute — On-demand NVIDIA GPU power",
+  title: "Quanta — Compute on demand",
   description:
-    "Rent enterprise-grade NVIDIA GPUs on demand. Create a job, run your workload, and pay only for the compute you actually used — settled in $QNTA on a decentralised GPU network.",
+    "Compute on demand with wallet settlement, model discovery and secure terminal access. Run on-demand compute for AI agents, inference, fine-tuning and evaluation.",
   keywords: [
     "GPU cloud",
-    "NVIDIA H100",
-    "AI training",
+    "on-demand compute",
+    "AI agents",
     "inference",
-    "decentralised compute",
-    "on-demand GPU",
+    "fine-tuning",
+    "NVIDIA H100",
+    "wallet settlement",
   ],
   openGraph: {
-    title: "Quanta Compute — On-demand NVIDIA GPU power",
+    title: "Quanta — Compute on demand",
     description:
-      "Enterprise GPUs, per-second billing, settled in the native token. No hardware to own.",
+      "Compute on demand with wallet settlement and secure terminal access.",
     type: "website",
   },
   icons: {
@@ -53,6 +54,7 @@ export default function RootLayout({
           <style>{`.reveal{opacity:1!important;transform:none!important;filter:none!important}`}</style>
         </noscript>
         <SmoothScroll />
+        <div className="intro-veil" aria-hidden="true" />
         {children}
       </body>
     </html>

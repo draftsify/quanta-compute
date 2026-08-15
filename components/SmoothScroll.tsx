@@ -127,7 +127,7 @@ export default function SmoothScroll() {
       e.preventDefault();
       target = clamp(top);
       start();
-      history.replaceState(null, "", id ? `#${id}` : " ");
+      history.replaceState(null, "", id ? `#${id}` : location.pathname);
     };
 
     window.addEventListener("wheel", onWheel, { passive: false });

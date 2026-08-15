@@ -4,10 +4,11 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const LINKS = [
-  { label: "Platform", href: "#platform" },
-  { label: "GPUs", href: "#gpus" },
-  { label: "How it works", href: "#how" },
-  { label: "Token", href: "#token" },
+  { label: "Products", href: "#products" },
+  { label: "Included", href: "#included" },
+  { label: "Model index", href: "#index" },
+  { label: "Process", href: "#process" },
+  { label: "Payment", href: "#payment" },
   { label: "FAQ", href: "#faq" },
 ];
 
@@ -80,7 +81,7 @@ export default function Nav() {
               href="#cta"
               className="hidden rounded-[4px] border border-white/[0.12] bg-white/[0.05] px-4 py-2 text-[13px] font-medium text-white/85 transition-colors hover:border-white/20 hover:bg-white/[0.09] hover:text-white sm:inline-flex"
             >
-              Launch console
+              Create account
             </a>
             <button
               type="button"
@@ -132,7 +133,7 @@ export default function Nav() {
               onClick={() => setOpen(false)}
               className="mt-4 mb-3 block rounded-[4px] bg-white py-3 text-center text-[14px] font-semibold text-black"
             >
-              Launch console
+              Create account
             </a>
           </li>
         </ul>

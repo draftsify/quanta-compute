@@ -1,21 +1,24 @@
-# Quanta Compute — landing page
+# Quanta — landing page
 
-Landing page for **Quanta Compute**, a GPU compute platform that lets startups and AI
-teams rent enterprise NVIDIA GPUs on demand: create a job, run the workload, and pay
-only for the compute actually used — settled in the network's native token.
+Marketing site for **Quanta**, a pay-per-job GPU compute platform for AI agents,
+model runs and small ML workloads. Search a model, rent capacity, run the job with
+scoped terminal access, and settle usage from a connected wallet.
+
+Copy and structure are carried over from the previous build of the same product
+(icpx.cloud) onto the current Quanta identity.
 
 ## What's in here
 
-- **Hero** with a live ASCII-art background: the source render is sampled on a glyph
-  grid in a `<canvas>` and redrawn ~18×/s with a slow wave, so the terrain breathes
-  like a stream of data (`components/AsciiBackground.tsx`).
-- **Silicon partners** section — NVIDIA as the certified compute partner, plus the
-  supported GPU classes in a marquee.
-- **Platform**, **How it works** (with a CLI snippet), **GPU catalogue** pricing
-  table, **network economics**, **FAQ** accordion, **CTA** and a full **footer**.
+- **Hero** on the source render put through a CSS halftone screen — a soft base
+  pass plus the same frame masked by a 45° dot grid, with a slow transform drift.
+- **Silicon partners** (NVIDIA), **Products**, **Included**, **Model index** with
+  the GPU class table, **Process** (search / rent / run / settle) with a CLI
+  snippet, **Wallet payment**, **Compute payment**, **FAQ**, CTA and footer.
+- **Inertial scrolling** on precise pointers, a **liquid-glass header** that
+  condenses on scroll, and a viewport-bounded **blur-in** on load.
 
-Visual language follows a dark, dashed-frame layout: pure black canvas, `1px dashed`
-container outlines, Manrope for UI and JetBrains Mono for technical labels.
+Visual language: pure black canvas, `1px dashed` container outlines, near-square
+2–8px corners, Manrope for UI and JetBrains Mono for technical labels.
 
 ## Stack
 
@@ -31,6 +34,8 @@ npm run build   # production build
 
 ## Notes
 
-- All copy and figures are placeholders for the marketing site; there is no backend.
-- The NVIDIA mark comes from [Simple Icons](https://simpleicons.org) (CC0) and is used
-  to reference the hardware the network runs on.
+- There is no backend: forms, search and account links are presentational.
+- The token contract address in the *Compute payment* section is carried over
+  from the previous build — check it before going live.
+- The NVIDIA mark comes from [Simple Icons](https://simpleicons.org) (CC0) and
+  references the hardware the network runs on.

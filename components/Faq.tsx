@@ -4,28 +4,36 @@ import { useState } from "react";
 
 const ITEMS = [
   {
-    q: "What exactly am I paying for?",
-    a: "Only the seconds your job actually occupies a GPU. Billing starts when the container is scheduled and stops the moment the job exits. There is no reservation fee, no minimum commitment and no charge for idle time.",
+    q: "What is Quanta?",
+    a: "Quanta is a pay-per-job GPU compute platform for AI agents, model runs and small ML workloads.",
   },
   {
-    q: "Which GPUs can I get?",
-    a: "The network aggregates NVIDIA H200, H100 SXM/PCIe, A100 80GB, L40S and RTX 6000 Ada class hardware. You pick a class and a region, the scheduler finds the cheapest node that matches your memory, interconnect and availability constraints.",
+    q: "How do I get access?",
+    a: "Create an account with email or wallet. Wallet balances and workspace access are available in the dashboard.",
   },
   {
-    q: "How is this cheaper than a hyperscaler?",
-    a: "Traditional clouds price in a reserved-capacity margin and charge whether or not you use the machine. Quanta matches your job against spare capacity across independent operators, so you get the same silicon without paying for someone else's idle fleet.",
+    q: "Which wallets are supported?",
+    a: "Phantom and Solflare are supported now. Fuse support is prepared for a later release.",
   },
   {
-    q: "Do I have to hold the token to use the platform?",
-    a: "Settlement happens in $QNTA under the hood, but you can top up a balance with a card or stablecoin and the conversion is handled for you. Teams that hold and stake $QNTA get a discount on the effective hourly rate.",
+    q: "How do payments work?",
+    a: "Review the job price, approve payment with your wallet and track spend in the dashboard.",
   },
   {
-    q: "How do I run a workload?",
-    a: "Push a container image or point us at a Git repo, declare the GPU class and the entrypoint, then create the job from the console, the CLI or the REST API. Logs, checkpoints and artifacts stream back to your storage bucket in real time.",
+    q: "How does SSH work?",
+    a: "You generate a key locally. Quanta stores only the public key and fingerprint.",
   },
   {
-    q: "Is my data isolated?",
-    a: "Every job runs in a hardware-isolated container with an ephemeral encrypted volume that is wiped on exit. Operators never get shell access to your workload and traffic between your client and the node is fully encrypted.",
+    q: "Is MFA supported?",
+    a: "Yes. TOTP is supported in the dashboard and required for sensitive terminal flows.",
+  },
+  {
+    q: "Can I reset my password?",
+    a: "Yes. Use Forgot password on the sign-in page and follow the email link.",
+  },
+  {
+    q: "Is mainnet live?",
+    a: "Public access opens after final testing.",
   },
 ];
 
@@ -40,7 +48,7 @@ export default function Faq() {
           <div
             key={item.q}
             className="dashed reveal rounded-[4px] bg-white/[0.015]"
-            data-delay={i * 50}
+            data-delay={i * 40}
           >
             <button
               type="button"

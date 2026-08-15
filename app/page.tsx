@@ -1,52 +1,64 @@
-import AsciiBackground from "@/components/AsciiBackground";
+import CopyAddress from "@/components/CopyAddress";
 import Faq from "@/components/Faq";
 import Footer from "@/components/Footer";
+import HalftoneBackground from "@/components/HalftoneBackground";
 import Nav from "@/components/Nav";
 import NvidiaMark from "@/components/NvidiaMark";
 import Reveal from "@/components/Reveal";
 
 /* ------------------------------------------------------------------ data */
 
-const GPU_CLASSES = [
-  "H200 141GB",
-  "H100 SXM5",
-  "H100 PCIe",
-  "A100 80GB",
-  "L40S 48GB",
-  "RTX 6000 Ada",
-  "A6000 48GB",
-  "RTX 4090",
+export const TOKEN_ADDRESS = "HdeAPoHivsm9MZfeY5tW7apJEprc8Fs594bWmnzfpump";
+
+const LAUNCH_PATH = [
+  { step: "Search", detail: "Find a model, skill or workload template that matches the job." },
+  { step: "Rent", detail: "Choose GPU capacity and approve the quote before anything runs." },
+  { step: "Run", detail: "Open logs, SSH or terminal access while the job is active." },
+  { step: "Settle", detail: "Pay for completed compute and return unused balance to the wallet." },
 ];
 
-const FEATURES = [
+const PRODUCTS = [
   {
-    title: "Per-second billing",
-    body: "The meter starts when your container is scheduled and stops the instant it exits. Idle time is never billed, and there is no minimum commitment to unlock a rate.",
+    title: "AI agent runs",
+    body: "Give agents GPU tools, logs and a clean runtime for research, automation and evaluation.",
+    tags: ["Agents", "Tools", "Logs"],
     glow: "rgb(116,232,138)",
-    icon: (
-      <>
-        <circle cx="12" cy="12" r="8" />
-        <path d="M12 8v4l2.5 2.5" />
-      </>
-    ),
   },
   {
-    title: "Elastic by default",
-    body: "Ask for one GPU or three hundred. The scheduler spreads your job across the network, keeps interconnect-sensitive workloads on the same fabric, and releases nodes the moment you are done.",
+    title: "One-click deploys",
+    body: "Start from a model or skill, pick capacity and launch a run without building cloud glue.",
+    tags: ["Models", "Skills", "Deploy"],
     glow: "rgb(153,238,255)",
+  },
+  {
+    title: "Machine learning for startups",
+    body: "Prototype, fine-tune and validate models without buying hardware or reserving clusters.",
+    tags: ["Fine-tune", "Batch", "Eval"],
+    glow: "rgb(255,195,0)",
+  },
+  {
+    title: "Private GPU sessions",
+    body: "Open SSH, stream logs and close the job when the workload is complete.",
+    tags: ["SSH", "Terminal", "Receipts"],
+    glow: "rgb(169,86,247)",
+  },
+];
+
+const INCLUDED = [
+  {
+    title: "Choose GPUs",
+    body: "Select model family, VRAM class, region and max spend before launch.",
     icon: (
       <>
-        <rect x="3" y="4" width="7" height="7" rx="1.5" />
-        <rect x="14" y="4" width="7" height="7" rx="1.5" />
-        <rect x="3" y="14" width="7" height="7" rx="1.5" />
-        <path d="M14 17.5h7M17.5 14v7" />
+        <rect x="3.5" y="6" width="17" height="12" rx="1" />
+        <rect x="7" y="9.5" width="10" height="5" rx="0.5" />
+        <path d="M7 6V4M12 6V4M17 6V4M7 20v-2M12 20v-2M17 20v-2" />
       </>
     ),
   },
   {
-    title: "Bring your own container",
-    body: "Any OCI image runs as-is. Point us at a registry or a Git repo, declare your entrypoint, and CUDA, drivers and NCCL are wired up for you before the first line executes.",
-    glow: "rgb(255,195,0)",
+    title: "Deploy models",
+    body: "Search NVIDIA models and skills, then launch the workload from one flow.",
     icon: (
       <>
         <path d="M3 8.5 12 4l9 4.5-9 4.5-9-4.5Z" />
@@ -56,92 +68,70 @@ const FEATURES = [
     ),
   },
   {
-    title: "Token-settled economics",
-    body: "Every job settles on-chain in $QNTA. Operators are paid automatically per second of verified compute, and stakers receive a share of the network fee.",
-    glow: "rgb(169,86,247)",
+    title: "Run agents",
+    body: "Give agents isolated compute, terminal access and live logs per job.",
     icon: (
       <>
-        <circle cx="12" cy="12" r="8.5" />
-        <path d="M12 7.5v9M9.5 10h5M9.5 14h5" />
+        <rect x="4" y="7" width="16" height="12" rx="1.5" />
+        <path d="M9 12h.01M15 12h.01M9.5 15.5h5M12 7V4" />
+        <circle cx="12" cy="3.5" r="1" />
+      </>
+    ),
+  },
+  {
+    title: "Train and evaluate",
+    body: "Run fine-tunes, batch inference, validation sets and model comparisons.",
+    icon: (
+      <>
+        <path d="M4 19V5M4 19h16" />
+        <path d="m7.5 15 3.5-4 3 2.5L20 7" />
+      </>
+    ),
+  },
+  {
+    title: "Metered runs",
+    body: "Fund compute with a wallet, cap spend and refund unused balance at close.",
+    icon: (
+      <>
+        <circle cx="12" cy="12" r="8" />
+        <path d="M12 8v4l2.5 2.5" />
+      </>
+    ),
+  },
+  {
+    title: "Secure access",
+    body: "Use MFA, CSRF controls, signed wallet actions and scoped SSH keys.",
+    icon: (
+      <>
+        <path d="M12 3.5 5 6.5v5c0 4 2.9 7.6 7 9 4.1-1.4 7-5 7-9v-5Z" />
+        <path d="m9.5 12 1.8 1.8L15 10" />
       </>
     ),
   },
 ];
 
-const STEPS = [
-  {
-    n: "01",
-    title: "Create a job",
-    body: "Describe the workload once: image, entrypoint, GPU class, memory floor and region. Save it as a template and reuse it from the console, the CLI or the REST API.",
-  },
-  {
-    n: "02",
-    title: "The network bids",
-    body: "Independent operators compete for your job in real time. The scheduler picks the cheapest node that satisfies every constraint, then provisions it in seconds.",
-  },
-  {
-    n: "03",
-    title: "Pay for what ran",
-    body: "Logs and checkpoints stream back while the job runs. When it exits, the exact runtime is settled in $QNTA and the node is released back to the pool.",
-  },
+const GPU_CLASSES = [
+  { gpu: "H200", vram: "141 GB HBM3e", net: "3.2 Tb/s NVLink", best: "Frontier model training", tag: "New" },
+  { gpu: "H100 SXM5", vram: "80 GB HBM3", net: "900 GB/s NVLink", best: "Distributed training" },
+  { gpu: "H100 PCIe", vram: "80 GB HBM3", net: "64 GB/s PCIe 5.0", best: "Inference at scale" },
+  { gpu: "A100", vram: "80 GB HBM2e", net: "600 GB/s NVLink", best: "Fine-tuning, HPC" },
+  { gpu: "L40S", vram: "48 GB GDDR6", net: "64 GB/s PCIe 4.0", best: "Inference, rendering" },
+  { gpu: "RTX 4090", vram: "24 GB GDDR6X", net: "32 GB/s PCIe 4.0", best: "Agents, prototyping" },
 ];
 
-const PRICING = [
-  {
-    gpu: "NVIDIA H200",
-    vram: "141 GB HBM3e",
-    net: "3.2 Tb/s NVLink",
-    best: "Frontier model training",
-    price: "3.19",
-    highlight: true,
-  },
-  {
-    gpu: "NVIDIA H100 SXM5",
-    vram: "80 GB HBM3",
-    net: "900 GB/s NVLink",
-    best: "Distributed training",
-    price: "2.24",
-  },
-  {
-    gpu: "NVIDIA A100",
-    vram: "80 GB HBM2e",
-    net: "600 GB/s NVLink",
-    best: "Fine-tuning, HPC",
-    price: "1.28",
-  },
-  {
-    gpu: "NVIDIA L40S",
-    vram: "48 GB GDDR6",
-    net: "64 GB/s PCIe 4.0",
-    best: "Inference, rendering",
-    price: "0.79",
-  },
-  {
-    gpu: "NVIDIA RTX 4090",
-    vram: "24 GB GDDR6X",
-    net: "32 GB/s PCIe 4.0",
-    best: "Agents, prototyping",
-    price: "0.42",
-  },
+const CATALOG_TABS = ["Models", "Skills", "Blueprints", "GPUs"];
+
+const WORKLOADS = [
+  { k: "Agent workloads", v: "Long-running tool use, browser tasks and evaluation loops" },
+  { k: "Model deploys", v: "Inference, embeddings, voice, vision and reranking jobs" },
+  { k: "Startup ML", v: "Fine-tuning, dataset tests, demos and product validation" },
+  { k: "Provider capacity", v: "GPU supply, usage receipts, health and settlement" },
 ];
 
-const BENEFITS = [
-  {
-    k: "No hardware to own",
-    v: "Skip the capex, the lead times and the depreciation. Capacity appears when the job does.",
-  },
-  {
-    k: "Up to 74% cheaper",
-    v: "Same silicon as the hyperscalers, priced by an open market instead of a reserved-capacity margin.",
-  },
-  {
-    k: "Seconds to schedule",
-    v: "Median time from job creation to first CUDA kernel is under 40 seconds across the network.",
-  },
-  {
-    k: "Isolated and wiped",
-    v: "Hardware-isolated containers on ephemeral encrypted volumes, destroyed the moment a job exits.",
-  },
+const WALLETS = [
+  { name: "Phantom", status: "Supported" },
+  { name: "Solflare", status: "Supported" },
+  { name: "Fuse", status: "Later release" },
 ];
 
 /* ------------------------------------------------------------- primitives */
@@ -167,7 +157,7 @@ function SectionHeading({
       </h2>
       {sub ? (
         <p
-          className="reveal mx-auto mt-5 max-w-xl text-center text-[15px] leading-[1.6] text-muted text-balance"
+          className="reveal mx-auto mt-5 max-w-2xl text-center text-[15px] leading-[1.6] text-muted text-balance"
           data-delay="80"
         >
           {sub}
@@ -206,94 +196,89 @@ export default function Home() {
         {/* ============================================================ HERO */}
         <section className="relative px-4 pt-16 sm:px-6 sm:pt-[72px]">
           <div className="dashed relative mx-auto w-full max-w-[1200px] overflow-hidden">
-            {/* ASCII terrain */}
             <div className="pointer-events-none absolute inset-0">
-              <div className="mask-fade-b absolute inset-0 opacity-90">
-                <AsciiBackground scale={11} gain={1.35} />
+              <div className="mask-fade-b absolute inset-0">
+                <HalftoneBackground pitch={7} priority />
               </div>
-              <div className="absolute inset-0 bg-[radial-gradient(58%_48%_at_50%_46%,rgba(0,0,0,0.95)_0%,rgba(0,0,0,0.68)_52%,transparent_82%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(52%_44%_at_50%_44%,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.58)_56%,transparent_86%)]" />
               <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent" />
             </div>
 
-            <div className="relative flex min-h-[620px] flex-col items-center justify-center px-5 py-24 sm:min-h-[720px] sm:py-28">
-              <a
-                href="#gpus"
-                className="reveal group flex items-center gap-2.5 rounded-[4px] border border-white/[0.1] bg-white/[0.04] py-1 pr-4 pl-1 backdrop-blur-md transition-colors hover:border-white/20 hover:bg-white/[0.07]"
-              >
+            <div className="relative flex min-h-[600px] flex-col items-center justify-center px-5 py-24 sm:min-h-[700px] sm:py-28">
+              <div className="reveal flex items-center gap-2.5 rounded-[4px] border border-white/[0.1] bg-black/40 py-1 pr-4 pl-1">
                 <span className="rounded-[2px] border border-accent/25 bg-accent/12 px-2 py-1 text-[11px] font-semibold tracking-[0.02em] text-accent">
-                  New
+                  Quanta GPU cloud
                 </span>
-                <span className="text-[12.5px] font-medium text-white/85 sm:text-[13px]">
-                  H200 clusters are live in 6 regions
+                <span className="text-[12.5px] font-medium text-white/80 sm:text-[13px]">
+                  Public access opens after final testing
                 </span>
-                <svg
-                  viewBox="0 0 16 16"
-                  className="h-3 w-3 text-white/50 transition-transform group-hover:translate-x-0.5"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  aria-hidden="true"
-                >
-                  <path d="M6 3.5 10.5 8 6 12.5" />
-                </svg>
-              </a>
+              </div>
 
               <h1
-                className="reveal mt-8 max-w-[16ch] text-center text-[38px] leading-[1.03] font-semibold tracking-[-0.045em] text-balance sm:text-[62px] lg:text-[76px]"
+                className="reveal mt-8 text-center text-[46px] leading-[1.02] font-semibold tracking-[-0.045em] text-balance sm:text-[76px] lg:text-[92px]"
                 data-delay="60"
               >
-                <span className="text-hero-gradient">
-                  Enterprise GPUs, the second you need them.
-                </span>
+                <span className="text-hero-gradient">Compute on demand.</span>
               </h1>
 
               <p
-                className="reveal mt-6 max-w-[52ch] text-center text-[15px] leading-[1.62] text-white/60 text-balance sm:text-[17px]"
+                className="reveal mt-6 max-w-[58ch] text-center text-[15px] leading-[1.62] text-white/60 text-balance sm:text-[17px]"
                 data-delay="140"
               >
-                Quanta lets startups and AI teams rent powerful NVIDIA GPUs on
-                demand. Create a job, run your workload, pay only for the compute
-                you actually used — settled on a decentralised network.
+                Run on-demand compute for AI agents, inference, fine-tuning and
+                evaluation. Search models, deploy a run and keep terminal access
+                scoped to the workload.
               </p>
 
               <div
-                className="reveal mt-9 flex flex-col items-center gap-3 sm:flex-row"
+                className="reveal mt-9 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row"
                 data-delay="220"
               >
                 <a
                   href="#cta"
                   className="w-full rounded-[4px] bg-white px-6 py-3 text-center text-[13.5px] font-semibold tracking-[-0.01em] text-black transition-colors hover:bg-white/88 sm:w-auto"
                 >
-                  Start a job
+                  Create account
                 </a>
                 <a
-                  href="#gpus"
-                  className="w-full rounded-[4px] border border-white/[0.12] bg-white/[0.04] px-6 py-3 text-center text-[13.5px] font-medium tracking-[-0.01em] text-white/85 backdrop-blur-md transition-colors hover:border-white/20 hover:bg-white/[0.08] hover:text-white sm:w-auto"
+                  href="#index"
+                  className="w-full rounded-[4px] border border-white/[0.14] bg-black/40 px-6 py-3 text-center text-[13.5px] font-medium tracking-[-0.01em] text-white/85 transition-colors hover:border-white/25 hover:bg-white/[0.06] hover:text-white sm:w-auto"
                 >
-                  See GPU pricing
+                  Search models
                 </a>
               </div>
 
-              <dl
-                className="reveal mt-16 grid w-full max-w-3xl grid-cols-2 gap-px overflow-hidden rounded-xl border border-white/[0.07] bg-white/[0.05] backdrop-blur-sm sm:grid-cols-4"
-                data-delay="300"
+              <ul
+                className="reveal mt-8 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-2"
+                data-delay="280"
               >
-                {[
-                  ["12,400+", "GPUs online"],
-                  ["38", "Regions"],
-                  ["$0.42", "Per GPU hour, from"],
-                  ["99.95%", "Job success rate"],
-                ].map(([v, k]) => (
-                  <div key={k} className="bg-black/70 px-4 py-5 text-center">
-                    <dt className="text-[20px] font-semibold tracking-[-0.03em] sm:text-[24px]">
-                      {v}
-                    </dt>
-                    <dd className="mt-1 text-[11.5px] tracking-[0.02em] text-faint">
-                      {k}
-                    </dd>
-                  </div>
+                {["AI agent workloads", "One-click deploys", "ML for startups"].map(
+                  (chip) => (
+                    <li
+                      key={chip}
+                      className="rounded-[3px] border border-white/[0.09] bg-black/40 px-2.5 py-1.5 font-mono text-[10.5px] tracking-[0.1em] text-white/45 uppercase"
+                    >
+                      {chip}
+                    </li>
+                  ),
+                )}
+              </ul>
+
+              <ol
+                className="reveal mt-14 grid w-full max-w-3xl grid-cols-2 gap-px overflow-hidden rounded-[4px] border border-white/[0.07] bg-white/[0.06] sm:grid-cols-4"
+                data-delay="340"
+              >
+                {LAUNCH_PATH.map((s, i) => (
+                  <li key={s.step} className="bg-black/80 px-4 py-4 text-center">
+                    <span className="font-mono text-[10.5px] tracking-[0.16em] text-accent/80">
+                      0{i + 1}
+                    </span>
+                    <p className="mt-1.5 text-[15px] font-semibold tracking-[-0.02em]">
+                      {s.step}
+                    </p>
+                  </li>
                 ))}
-              </dl>
+              </ol>
             </div>
           </div>
         </section>
@@ -343,18 +328,17 @@ export default function Home() {
               </div>
             </div>
 
-            {/* GPU marquee */}
             <div className="dashed marquee relative mt-px overflow-hidden py-7">
               <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-black to-transparent" />
               <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-black to-transparent" />
               <div className="marquee-track flex w-max items-center gap-10 sm:gap-14">
                 {[...GPU_CLASSES, ...GPU_CLASSES].map((g, i) => (
                   <span
-                    key={`${g}-${i}`}
+                    key={`${g.gpu}-${i}`}
                     className="flex shrink-0 items-center gap-2.5 font-mono text-[12.5px] tracking-[0.08em] whitespace-nowrap text-white/35 uppercase"
                   >
                     <NvidiaMark className="h-3.5 w-3.5 text-[#76b900]/70" />
-                    {g}
+                    {g.gpu} · {g.vram.split(" ")[0]}GB
                   </span>
                 ))}
               </div>
@@ -362,38 +346,46 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ======================================================== PLATFORM */}
+        {/* ======================================================== PRODUCTS */}
         <section className="px-4 sm:px-6">
           <div className="mx-auto w-full max-w-[1200px]">
             <SectionHeading
-              id="platform"
-              eyebrow="The platform"
-              title="Everything you need to run compute, nothing you don't."
+              id="products"
+              eyebrow="Products"
+              title="Use compute when the work needs it."
+              sub="Use Quanta for agent runs, model deploys, startup ML experiments and private GPU sessions. Keep every run scoped, priced and easy to close."
             />
 
             <div className="grid grid-cols-1 gap-px md:grid-cols-2">
-              {FEATURES.map((f, i) => (
+              {PRODUCTS.map((p, i) => (
                 <article
-                  key={f.title}
+                  key={p.title}
                   className="dashed reveal group relative overflow-hidden px-6 py-9 sm:px-8 sm:py-11"
-                  data-delay={i * 70}
+                  data-delay={i * 60}
                 >
                   <div
-                    className="pointer-events-none absolute -top-24 left-1/2 h-56 w-[420px] -translate-x-1/2 opacity-[0.07] blur-2xl transition-opacity duration-500 group-hover:opacity-[0.16]"
+                    className="pointer-events-none absolute -top-24 left-1/2 h-56 w-[420px] -translate-x-1/2 opacity-[0.07] blur-2xl transition-opacity duration-500 group-hover:opacity-[0.15]"
                     style={{
-                      background: `radial-gradient(50% 50% at 50% 50%, ${f.glow} 0%, transparent 100%)`,
+                      background: `radial-gradient(50% 50% at 50% 50%, ${p.glow} 0%, transparent 100%)`,
                     }}
                   />
                   <div className="relative">
-                    <div className="mb-6 grid h-10 w-10 place-items-center rounded-[4px] border border-white/[0.08] bg-white/[0.04] text-white/80">
-                      <Icon>{f.icon}</Icon>
-                    </div>
                     <h3 className="text-[19px] font-semibold tracking-[-0.025em] sm:text-[21px]">
-                      {f.title}
+                      {p.title}
                     </h3>
                     <p className="mt-3 max-w-[46ch] text-[14.5px] leading-[1.65] text-muted">
-                      {f.body}
+                      {p.body}
                     </p>
+                    <ul className="mt-6 flex flex-wrap gap-2">
+                      {p.tags.map((tag) => (
+                        <li
+                          key={tag}
+                          className="rounded-[3px] border border-white/[0.08] bg-white/[0.02] px-2.5 py-1 font-mono text-[10.5px] tracking-[0.12em] text-white/45 uppercase"
+                        >
+                          {tag}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </article>
               ))}
@@ -401,93 +393,92 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ============================================================ HOW */}
+        {/* ======================================================== INCLUDED */}
         <section className="px-4 sm:px-6">
           <div className="mx-auto w-full max-w-[1200px]">
             <SectionHeading
-              id="how"
-              eyebrow="How it works"
-              title="From idea to running kernel in three steps."
+              id="included"
+              eyebrow="Included"
+              title="Everything around the GPU stays in one flow."
+              sub="Pick capacity, launch the job, watch logs, open terminal access and settle compute from the same dashboard."
             />
-            <div className="grid grid-cols-1 gap-px md:grid-cols-3">
-              {STEPS.map((s, i) => (
+
+            <div className="grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-3">
+              {INCLUDED.map((f, i) => (
                 <div
-                  key={s.n}
-                  className="dashed reveal px-6 py-10 sm:px-8 sm:py-12"
-                  data-delay={i * 90}
+                  key={f.title}
+                  className="dashed reveal px-6 py-9 sm:px-7 sm:py-10"
+                  data-delay={(i % 3) * 60}
                 >
-                  <span className="font-mono text-[12px] tracking-[0.2em] text-accent">
-                    {s.n}
-                  </span>
-                  <h3 className="mt-5 text-[19px] font-semibold tracking-[-0.025em]">
-                    {s.title}
+                  <div className="mb-6 grid h-10 w-10 place-items-center rounded-[4px] border border-white/[0.08] bg-white/[0.04] text-white/80">
+                    <Icon>{f.icon}</Icon>
+                  </div>
+                  <h3 className="text-[17px] font-semibold tracking-[-0.02em]">
+                    {f.title}
                   </h3>
-                  <p className="mt-3 text-[14.5px] leading-[1.65] text-muted">
-                    {s.body}
+                  <p className="mt-2.5 text-[14px] leading-[1.6] text-muted">
+                    {f.body}
                   </p>
                 </div>
               ))}
             </div>
-
-            {/* Terminal snippet */}
-            <div className="dashed reveal mt-px overflow-hidden">
-              <div className="flex items-center gap-2 border-b border-white/[0.06] px-5 py-3">
-                <span className="h-2.5 w-2.5 rounded-full bg-white/12" />
-                <span className="h-2.5 w-2.5 rounded-full bg-white/12" />
-                <span className="h-2.5 w-2.5 rounded-full bg-white/12" />
-                <span className="ml-2 font-mono text-[11.5px] tracking-[0.08em] text-faint uppercase">
-                  quanta-cli
-                </span>
-              </div>
-              <pre className="overflow-x-auto px-5 py-6 font-mono text-[12.5px] leading-[1.9] sm:px-8 sm:text-[13.5px]">
-                <code>
-                  <span className="text-accent">$</span>{" "}
-                  <span className="text-white">quanta jobs create</span>{" "}
-                  <span className="text-white/45">\</span>
-                  {"\n"}
-                  {"    "}
-                  <span className="text-white/45">--gpu</span> h100:8{" "}
-                  <span className="text-white/45">--image</span>{" "}
-                  ghcr.io/acme/trainer:1.4 <span className="text-white/45">\</span>
-                  {"\n"}
-                  {"    "}
-                  <span className="text-white/45">--cmd</span>{" "}
-                  &quot;torchrun train.py --epochs 3&quot;
-                  {"\n\n"}
-                  <span className="text-white/35">
-                    → matched 8× H100 SXM5 · eu-west · $2.24/gpu-hr
-                  </span>
-                  {"\n"}
-                  <span className="text-white/35">
-                    → job qc_8f3a21 scheduled in 31s · streaming logs…
-                  </span>
-                </code>
-              </pre>
-            </div>
           </div>
         </section>
 
-        {/* =========================================================== GPUS */}
+        {/* ===================================================== MODEL INDEX */}
         <section className="px-4 sm:px-6">
           <div className="mx-auto w-full max-w-[1200px]">
             <SectionHeading
-              id="gpus"
-              eyebrow="GPU catalogue"
-              title="Pick your silicon. Pay by the second."
-              sub="Rates below are current network medians. The scheduler always books the cheapest node that meets your constraints."
+              id="index"
+              eyebrow="Model index"
+              title="Search the model. Launch the job."
+              sub="Start from a model, skill or blueprint, then pick the GPU class that fits the workload."
             />
 
-            <div className="dashed reveal overflow-hidden">
+            <div className="dashed reveal p-5 sm:p-6">
+              <div className="flex items-center gap-3 rounded-[4px] border border-white/[0.1] bg-white/[0.02] px-4 py-3">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  className="h-4 w-4 shrink-0 text-faint"
+                  aria-hidden="true"
+                >
+                  <circle cx="11" cy="11" r="6.5" />
+                  <path d="m16 16 4 4" strokeLinecap="round" />
+                </svg>
+                <span className="text-[14px] text-faint">
+                  Search a model family, task type or runtime name
+                </span>
+              </div>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {CATALOG_TABS.map((tab, i) => (
+                  <li
+                    key={tab}
+                    className={`rounded-[3px] border px-3 py-1.5 font-mono text-[10.5px] tracking-[0.12em] uppercase ${
+                      i === 3
+                        ? "border-accent/25 bg-accent/10 text-accent"
+                        : "border-white/[0.09] bg-white/[0.02] text-white/45"
+                    }`}
+                  >
+                    {tab}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="dashed reveal mt-px overflow-hidden" data-delay="80">
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[680px] border-collapse text-left">
                   <thead>
                     <tr className="border-b border-white/[0.07]">
-                      {["GPU", "Memory", "Interconnect", "Best for", "Per hour"].map(
+                      {["GPU class", "Memory", "Interconnect", "Best for", "Price"].map(
                         (h) => (
                           <th
                             key={h}
                             className={`px-5 py-4 font-mono text-[11px] tracking-[0.14em] text-faint uppercase sm:px-6 ${
-                              h === "Per hour" ? "text-right" : ""
+                              h === "Price" ? "text-right" : ""
                             }`}
                           >
                             {h}
@@ -497,7 +488,7 @@ export default function Home() {
                     </tr>
                   </thead>
                   <tbody>
-                    {PRICING.map((row) => (
+                    {GPU_CLASSES.map((row) => (
                       <tr
                         key={row.gpu}
                         className="border-b border-white/[0.05] transition-colors last:border-0 hover:bg-white/[0.02]"
@@ -506,11 +497,11 @@ export default function Home() {
                           <div className="flex items-center gap-3">
                             <NvidiaMark className="h-4 w-4 shrink-0 text-[#76b900]" />
                             <span className="text-[14.5px] font-medium tracking-[-0.01em] whitespace-nowrap">
-                              {row.gpu.replace("NVIDIA ", "")}
+                              {row.gpu}
                             </span>
-                            {row.highlight ? (
+                            {row.tag ? (
                               <span className="rounded-[2px] border border-accent/25 bg-accent/10 px-2 py-0.5 font-mono text-[10px] tracking-[0.1em] text-accent uppercase">
-                                New
+                                {row.tag}
                               </span>
                             ) : null}
                           </div>
@@ -525,10 +516,9 @@ export default function Home() {
                           {row.best}
                         </td>
                         <td className="px-5 py-5 text-right whitespace-nowrap sm:px-6">
-                          <span className="font-mono text-[15px] font-medium">
-                            ${row.price}
+                          <span className="font-mono text-[12.5px] text-white/55">
+                            Quoted per job
                           </span>
-                          <span className="text-[12px] text-faint"> /hr</span>
                         </td>
                       </tr>
                     ))}
@@ -537,44 +527,195 @@ export default function Home() {
               </div>
               <div className="flex flex-col items-center justify-between gap-3 border-t border-white/[0.07] px-5 py-4 sm:flex-row sm:px-6">
                 <p className="text-[12.5px] text-faint">
-                  Billed per second · No egress fees · Stakers pay up to 18% less
+                  Review the job price and approve payment with your wallet before
+                  anything runs.
                 </p>
                 <a
-                  href="#cta"
-                  className="text-[13px] font-semibold text-accent transition-opacity hover:opacity-80"
+                  href="#process"
+                  className="text-[13px] font-medium text-accent transition-opacity hover:opacity-80"
                 >
-                  Reserve capacity →
+                  See the process →
                 </a>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ========================================================== TOKEN */}
+        {/* ========================================================= PROCESS */}
+        <section className="px-4 sm:px-6">
+          <div className="mx-auto w-full max-w-[1200px]">
+            <SectionHeading
+              id="process"
+              eyebrow="How it works"
+              title="From model idea to paid compute job."
+              sub="Quanta keeps the path short. Search, rent, run and settle without switching between cloud consoles, wallet tools and terminal scripts."
+            />
+
+            <div className="grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-4">
+              {LAUNCH_PATH.map((s, i) => (
+                <div
+                  key={s.step}
+                  className="dashed reveal px-6 py-10 sm:px-7 sm:py-11"
+                  data-delay={i * 70}
+                >
+                  <span className="font-mono text-[12px] tracking-[0.2em] text-accent">
+                    0{i + 1}
+                  </span>
+                  <h3 className="mt-5 text-[19px] font-semibold tracking-[-0.025em]">
+                    {s.step}
+                  </h3>
+                  <p className="mt-3 text-[14.5px] leading-[1.65] text-muted">
+                    {s.detail}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="dashed reveal mt-px overflow-hidden">
+              <div className="flex items-center gap-2 border-b border-white/[0.06] px-5 py-3">
+                <span className="h-2.5 w-2.5 rounded-full bg-white/12" />
+                <span className="h-2.5 w-2.5 rounded-full bg-white/12" />
+                <span className="h-2.5 w-2.5 rounded-full bg-white/12" />
+                <span className="ml-2 font-mono text-[11.5px] tracking-[0.08em] text-faint uppercase">
+                  quanta-cli
+                </span>
+              </div>
+              <pre className="overflow-x-auto px-5 py-6 font-mono text-[12.5px] leading-[1.9] sm:px-8 sm:text-[13.5px]">
+                <code>
+                  <span className="text-accent">$</span>{" "}
+                  <span className="text-white">quanta search</span> llama-3.1-70b
+                  {"\n"}
+                  <span className="text-white/35">
+                    → 3 runtimes · vllm, tensorrt-llm, nim
+                  </span>
+                  {"\n\n"}
+                  <span className="text-accent">$</span>{" "}
+                  <span className="text-white">quanta run</span>{" "}
+                  <span className="text-white/45">--gpu</span> h100:2{" "}
+                  <span className="text-white/45">--max-spend</span> 25{" "}
+                  <span className="text-white/45">\</span>
+                  {"\n"}
+                  {"    "}
+                  <span className="text-white/45">--model</span> llama-3.1-70b{" "}
+                  <span className="text-white/45">--runtime</span> vllm
+                  {"\n"}
+                  <span className="text-white/35">
+                    → quote approved in wallet · job qx_8f3a21 live
+                  </span>
+                  {"\n"}
+                  <span className="text-white/35">
+                    → ssh quanta@qx_8f3a21 · streaming logs…
+                  </span>
+                </code>
+              </pre>
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================= PAYMENT */}
+        <section className="px-4 sm:px-6">
+          <div className="mx-auto w-full max-w-[1200px]">
+            <SectionHeading
+              id="payment"
+              eyebrow="Wallet payment"
+              title="Pay for compute when the job runs."
+              sub="Connect Phantom, Solflare or Fuse, fund the run and settle usage from the wallet attached to the account."
+            />
+
+            <div className="grid grid-cols-1 gap-px lg:grid-cols-3">
+              {WALLETS.map((w, i) => (
+                <div
+                  key={w.name}
+                  className="dashed reveal flex items-center justify-between gap-4 px-6 py-7"
+                  data-delay={i * 60}
+                >
+                  <span className="text-[16px] font-semibold tracking-[-0.02em]">
+                    {w.name}
+                  </span>
+                  <span
+                    className={`rounded-[3px] border px-2.5 py-1 font-mono text-[10px] tracking-[0.12em] uppercase ${
+                      w.status === "Supported"
+                        ? "border-accent/25 bg-accent/10 text-accent"
+                        : "border-white/[0.09] bg-white/[0.02] text-white/40"
+                    }`}
+                  >
+                    {w.status}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 gap-px md:grid-cols-2">
+              {WORKLOADS.map((w, i) => (
+                <div
+                  key={w.k}
+                  className="dashed reveal px-6 py-8 sm:px-7"
+                  data-delay={(i % 2) * 60}
+                >
+                  <h3 className="text-[16px] font-semibold tracking-[-0.02em]">
+                    {w.k}
+                  </h3>
+                  <p className="mt-2 text-[14px] leading-[1.6] text-muted">{w.v}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================== TOKEN */}
         <section className="px-4 sm:px-6">
           <div className="mx-auto w-full max-w-[1200px]">
             <SectionHeading
               id="token"
-              eyebrow="Network economics"
-              title="One token, settling every second of compute."
-              sub="$QNTA is the unit of account between the teams that need GPUs and the operators that own them."
+              eyebrow="Compute payment"
+              title="Pay for compute with Quanta."
+              sub="Use Quanta to fund compute jobs, set spend caps, release provider payments and refund unused balances when the job closes."
             />
 
-            <div className="grid grid-cols-1 gap-px md:grid-cols-2 lg:grid-cols-4">
-              {BENEFITS.map((b, i) => (
-                <div
-                  key={b.k}
-                  className="dashed reveal px-6 py-9 sm:px-7 sm:py-10"
-                  data-delay={i * 70}
-                >
-                  <h3 className="text-[17px] font-semibold tracking-[-0.02em]">
-                    {b.k}
-                  </h3>
-                  <p className="mt-2.5 text-[14px] leading-[1.6] text-muted">
-                    {b.v}
-                  </p>
+            <div className="grid grid-cols-1 gap-px lg:grid-cols-[1fr_1.4fr]">
+              <div className="dashed reveal grid grid-cols-2 gap-px">
+                {[
+                  ["Compute", "Usage"],
+                  ["1,000,000,000", "Supply"],
+                ].map(([v, k]) => (
+                  <div
+                    key={k}
+                    className="flex flex-col items-center justify-center gap-1.5 px-4 py-10"
+                  >
+                    <span className="text-[17px] font-semibold tracking-[-0.03em] sm:text-[19px]">
+                      {v}
+                    </span>
+                    <span className="font-mono text-[10.5px] tracking-[0.14em] text-faint uppercase">
+                      {k}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="dashed reveal px-6 py-8 sm:px-8" data-delay="80">
+                <p className="mb-3 font-mono text-[10.5px] tracking-[0.16em] text-faint uppercase">
+                  Contract
+                </p>
+                <CopyAddress address={TOKEN_ADDRESS} />
+                <div className="mt-5 flex flex-wrap gap-2">
+                  <a
+                    href="https://dexscreener.com"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="rounded-[4px] border border-white/[0.12] bg-white/[0.03] px-4 py-2 text-[13px] font-medium text-white/80 transition-colors hover:border-white/25 hover:text-white"
+                  >
+                    Dexscreener
+                  </a>
+                  <a
+                    href="https://x.com"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="rounded-[4px] border border-white/[0.12] bg-white/[0.03] px-4 py-2 text-[13px] font-medium text-white/80 transition-colors hover:border-white/25 hover:text-white"
+                  >
+                    X
+                  </a>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </section>
@@ -585,7 +726,7 @@ export default function Home() {
             <SectionHeading
               id="faq"
               eyebrow="FAQ"
-              title="Frequently asked questions."
+              title="Short answers for builders and providers."
             />
             <div className="pb-4">
               <Faq />
@@ -597,45 +738,38 @@ export default function Home() {
         <section id="cta" className="scroll-mt-24 px-4 py-20 sm:px-6 sm:py-28">
           <div className="dashed relative mx-auto w-full max-w-[1200px] overflow-hidden">
             <div className="pointer-events-none absolute inset-0">
-              <div className="mask-fade-edges absolute inset-0 scale-y-[-1] opacity-60">
-                <AsciiBackground scale={12} gain={1.05} />
+              <div className="mask-fade-edges absolute inset-0 scale-y-[-1] opacity-70">
+                <HalftoneBackground pitch={8} />
               </div>
-              <div className="absolute inset-0 bg-[radial-gradient(70%_70%_at_50%_50%,rgba(0,0,0,0.85)_0%,rgba(0,0,0,0.4)_60%,transparent_100%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(66%_66%_at_50%_50%,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.5)_58%,transparent_100%)]" />
             </div>
 
             <div className="relative flex flex-col items-center px-5 py-20 sm:py-24">
+              <p className="reveal mb-5 font-mono text-[11.5px] tracking-[0.18em] text-accent uppercase">
+                Start
+              </p>
               <h2 className="reveal max-w-[18ch] text-center text-[30px] leading-[1.08] font-semibold tracking-[-0.04em] text-balance sm:text-[46px]">
                 <span className="text-hero-gradient">
-                  Spin up your first GPU in under a minute.
+                  Bring your workloads to pay-per-job compute.
                 </span>
               </h2>
-              <p
-                className="reveal mt-5 max-w-[48ch] text-center text-[15px] leading-[1.6] text-white/60 text-balance"
-                data-delay="80"
-              >
-                No hardware, no reservations, no idle bill. Create an account,
-                push a container, and only pay for the seconds you use.
-              </p>
               <div
                 className="reveal mt-9 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row"
-                data-delay="160"
+                data-delay="120"
               >
                 <a
                   href="#top"
                   className="w-full rounded-[4px] bg-white px-7 py-3.5 text-center text-[13.5px] font-semibold tracking-[-0.01em] text-black transition-colors hover:bg-white/88 sm:w-auto"
                 >
-                  Get started free
+                  Create account
                 </a>
                 <a
-                  href="#gpus"
-                  className="w-full rounded-[4px] border border-white/[0.12] bg-white/[0.04] px-7 py-3.5 text-center text-[13.5px] font-medium tracking-[-0.01em] text-white/85 backdrop-blur-md transition-colors hover:border-white/20 hover:bg-white/[0.08] hover:text-white sm:w-auto"
+                  href="#index"
+                  className="w-full rounded-[4px] border border-white/[0.14] bg-black/40 px-7 py-3.5 text-center text-[13.5px] font-medium tracking-[-0.01em] text-white/85 transition-colors hover:border-white/25 hover:bg-white/[0.06] hover:text-white sm:w-auto"
                 >
-                  Talk to us
+                  Search models
                 </a>
               </div>
-              <p className="reveal mt-7 font-mono text-[11px] tracking-[0.14em] text-faint uppercase">
-                $10 in free compute credit · no card required
-              </p>
             </div>
           </div>
         </section>
